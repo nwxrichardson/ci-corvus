@@ -1,1 +1,11 @@
-
+name: 'Comment on PR'
+description: 'Comment on PR'
+branding:
+  icon: 'box'
+  color: 'purple'
+inputs:
+  github-token: 
+    description: 'A token'
+    required: true
+runs:
+  using: 'docker'
