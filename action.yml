@@ -8,4 +8,5 @@ inputs:
     description: 'A token'
     required: true
 runs:
-  using: 'docker'
+  using: node20
+  main: dist/index.js
