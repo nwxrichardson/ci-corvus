@@ -97,7 +97,7 @@
           <configuration>
              <archive>
                <manifest>
-                 <mainClass>uk.ac.york.ci.corvus.Commenter</mainClass>
+                 <mainClass>uk.ac.york.ci.corvus.CommenterJob</mainClass>
                </manifest>
              </archive>
           </configuration>
