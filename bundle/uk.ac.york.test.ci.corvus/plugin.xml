@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+         <category 
+         	id="uk.ac.york.ci.corvus.category"
+         	name="Corvus-CI">
+         </category>
+         <command
+               categoryId="uk.ac.york.ci.corvus.category"
+               defaultHandler="uk.ac.york.ci.corvus.handlers.CommentHandler"
+               id="uk.ac.york.ci.corvus.Comment"
+               name="Commenter">
+         </command>
+   </extension>
+   <extension
+   			point="org.eclipse.ui.menus">
+     <menuContribution
+           allPopups="false"
+           locationURI="popup:org.eclipse.ui.popup.any?before=compareWithMenu">
+        <menu
+              icon="icons/CorvusIcon.png"
+              label="Corvus">
+           <command
+                 commandId="uk.ac.york.ci.corvus.Comment"
+                 label="Genrate Image"
+                 style="push">
+              <visibleWhen
+                    checkEnabled="false">
+              </visibleWhen>
+           </command>
+        </menu>
+     </menuContribution>
+   	</extension>
+</plugin>
