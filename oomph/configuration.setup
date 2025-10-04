@@ -5,9 +5,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    label="Epsilon CI Container">
+    label="Corvus CI Container">
   <installation
-      name="epsilon-ci">
+      name="corvus-ci">
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="Epsilon">
@@ -296,9 +296,9 @@
         href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='epp.package.committers']/@versions[name='latest.released']"/>
   </installation>
   <workspace
-      name="epsilon-ci.workspace"
-      label="Epsilon CI Workspace">
-    <description>The Epsilon CI Workspace workspace provides useful settings.</description>
+      name="corvus-ci.workspace"
+      label="Corvus CI Workspace">
+    <description>The Corvus CI Workspace workspace provides useful settings.</description>
   </workspace>
   <description>The Epsilon CI Container configuration provides a well-equipped MDE DevOps environment.</description>
 </setup:Configuration>
