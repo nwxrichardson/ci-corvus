@@ -229,6 +229,22 @@
           name="org.eclipse.ocl.examples.feature.group"/>
     </setupTask>
     <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Corvus"
+    <requirement
+        name="org.eclipse.sirius"/>
+    <requirement
+        name="org.eclipse.sirius.ui"/>
+    <requirement
+        name="org.eclipse.sirius.common"/>
+    <requirement
+        name="org.eclipse.sirius.diagram"/>
+    <requirement
+        name="org.eclipse.sirius.diagram.ui"/>
+    <repository
+        url="https://download.eclipse.org/sirius/updates/releases/7.4.12/2023-03"/>
+    </setupTask>
+    <setupTask
         xsi:type="setup:CompoundTask"
         name="Additional Plugins">
       <setupTask
