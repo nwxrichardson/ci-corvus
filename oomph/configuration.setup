@@ -231,17 +231,17 @@
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="Corvus"
-    <requirement
+      <requirement
         name="org.eclipse.sirius"/>
-    <requirement
+      <requirement
         name="org.eclipse.sirius.ui"/>
-    <requirement
+      <requirement
         name="org.eclipse.sirius.common"/>
-    <requirement
+      <requirement
         name="org.eclipse.sirius.diagram"/>
-    <requirement
+      <requirement
         name="org.eclipse.sirius.diagram.ui"/>
-    <repository
+      <repository
         url="https://download.eclipse.org/sirius/updates/releases/7.4.12/2023-03"/>
     </setupTask>
     <setupTask
