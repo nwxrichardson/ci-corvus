@@ -32,6 +32,7 @@ https://mirror.aarnet.edu.au/pub/eclipse/epsilon/${EPSILON_VERSION},\
 https://mirror.aarnet.edu.au/pub/eclipse/emfatic/update,\
 https://mirror.aarnet.edu.au/pub/eclipse/modeling/gmp/gmf-tooling/updates/releases,\
 https://mirror.aarnet.edu.au/pub/eclipse/birt/update-site/latest,\
+https://download.eclipse.org/sirius/updates/releases/7.4.12/2023-03,\
 https://committed-consulting.gitlab.io/mde-devops/eclipse-ant-contributions/
 
 # # Start the install
