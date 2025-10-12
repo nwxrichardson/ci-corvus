@@ -1,4 +1,4 @@
-name: 'corvus-comment
+name: 'corvus-comment'
 description: 'Generate a comment showing Corvus comparisons'
 branding:
   icon: 'box'
