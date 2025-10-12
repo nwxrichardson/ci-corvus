@@ -230,7 +230,7 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="Corvus"
+        label="Corvus">
       <requirement
         name="org.eclipse.sirius"/>
       <requirement
