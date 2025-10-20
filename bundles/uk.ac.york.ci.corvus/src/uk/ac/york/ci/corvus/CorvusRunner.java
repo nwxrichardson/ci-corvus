@@ -1,29 +1,21 @@
 package uk.ac.york.ci.corvus;
 
-import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
-import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.query.DViewQuery;
-import org.eclipse.sirius.business.api.resource.ResourceDescriptor;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.business.api.session.factory.SessionFactory;
 import org.eclipse.sirius.common.tools.api.resource.ImageFileFormat;
-import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.business.api.dialect.ExportFormat;
 import org.eclipse.sirius.ui.business.api.dialect.ExportFormat.ExportDocumentFormat;
 import org.eclipse.sirius.ui.business.api.dialect.ExportResult;
-import org.eclipse.sirius.ui.business.api.session.UserSession;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 
@@ -40,7 +32,7 @@ public class CorvusRunner implements IApplication {
 
 	private Object run(Object argsArray) {
 		 // Get session from an absolute path (not in a workspace)
-        URI sessionResourceURI = URI.createFileURI("C:/Users/nr823/git/CI-Corvus/bundle/uk.ac.york.ci.corvus/psl.aird");
+        URI sessionResourceURI = URI.createFileURI("C:/Users/nr823/git/psl-ci/psl.example/acme.aird");
         Session session = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
 		try {
 			

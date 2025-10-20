@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='1'>
+  <unit id='uk.ac.york.ci.corvus' version='1.0.0.202510201226' generation='2'>
+    <update id='uk.ac.york.ci.corvus' range='[0.0.0,1.0.0.202510201226)' severity='0'/>
+    <properties size='5'>
+      <property name='org.eclipse.equinox.p2.name' value='Corvus'/>
+      <property name='maven-groupId' value='uk.ac.york.ci.corvus'/>
+      <property name='maven-artifactId' value='uk.ac.york.ci.corvus'/>
+      <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      <property name='maven-type' value='eclipse-plugin'/>
+    </properties>
+    <provides size='4'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='uk.ac.york.ci.corvus' version='1.0.0.202510201226'/>
+      <provided namespace='osgi.bundle' name='uk.ac.york.ci.corvus' version='1.0.0.202510201226'/>
+      <provided namespace='osgi.identity' name='uk.ac.york.ci.corvus' version='1.0.0.202510201226'>
+        <properties size='1'>
+          <property name='type' value='osgi.bundle'/>
+        </properties>
+      </provided>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+    </provides>
+    <requires size='11'>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.app' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.equinox.registry' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.34.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.sirius' range='7.4.12'/>
+      <required namespace='osgi.bundle' name='org.eclipse.sirius.ui' range='7.4.12'/>
+      <required namespace='osgi.bundle' name='org.eclipse.sirius.common' range='7.4.12'/>
+      <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.sirius.diagram' range='7.4.12'/>
+      <required namespace='osgi.bundle' name='org.eclipse.sirius.diagram.ui' range='7.4.12'/>
+      <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=21))'>
+        <description>
+          uk.ac.york.ci.corvus
+        </description>
+      </requiredProperties>
+      <required namespace='org.eclipse.equinox.p2.iu' name='uk.ac.york.ci.corvus.source' range='[1.0.0.202510201226,1.0.0.202510201226]' optional='true'>
+        <filter>
+          (org.eclipse.update.install.sources=true)
+        </filter>
+      </required>
+    </requires>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='uk.ac.york.ci.corvus' version='1.0.0.202510201226'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: uk.ac.york.ci.corvus;singleton:=true&#xA;Bundle-Version: 1.0.0.202510201226&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>

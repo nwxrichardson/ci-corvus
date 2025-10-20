@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='1'>
+  <artifact classifier='osgi.bundle' id='uk.ac.york.ci.corvus' version='1.0.0.202510201226'>
+    <properties size='8'>
+      <property name='artifact.size' value='5047'/>
+      <property name='download.size' value='5047'/>
+      <property name='download.checksum.sha-512' value='dc02a9f35e1e5d90d13cf527ae0511938ed75311f72b70f865e8d5de3536d4a0b35f4ca2aaf1ae925c4bc0f97e1d6715bca85192776a9992e26fbb0fc5f64d1f'/>
+      <property name='download.checksum.sha-256' value='67154c1726170405feb29331d0324c3db0767c00e4a1405c6c12e111f608eb08'/>
+      <property name='maven-groupId' value='uk.ac.york.ci.corvus'/>
+      <property name='maven-artifactId' value='uk.ac.york.ci.corvus'/>
+      <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      <property name='maven-type' value='eclipse-plugin'/>
+    </properties>
+  </artifact>
+</artifacts>
