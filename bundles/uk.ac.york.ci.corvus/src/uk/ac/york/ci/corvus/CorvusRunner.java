@@ -41,10 +41,8 @@ public class CorvusRunner implements IApplication {
 	        DViewQuery query = new DViewQuery(session.getOwnedViews().iterator().next());
 	        DRepresentationDescriptor representationDesc = query.getLoadedRepresentationsDescriptors().get(0);
 	        DRepresentation representation = representationDesc.getRepresentation();
-	        System.out.println(representation);
 //	         Export it as SVG image
 	        ExportFormat exportFormat = new ExportFormat(ExportDocumentFormat.NONE, ImageFileFormat.PNG);
-	        System.out.println(DialectUIManager.INSTANCE.canExport(exportFormat));
 	        ExportResult exp = DialectUIManager.INSTANCE.exportWithResult(representation, session, new Path("C:/Users/nr823/git/psl-ci/psl.example/image.png"), exportFormat,
 			        new NullProgressMonitor());
 		} catch (Exception e) {

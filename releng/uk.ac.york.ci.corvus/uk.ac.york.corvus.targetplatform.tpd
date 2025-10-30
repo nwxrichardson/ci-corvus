@@ -1,5 +1,9 @@
 target "Corvus Target Platform" environment JavaSE-21 with configurePhase requirements source
 
+location "file:/psl"{
+	psl
+}
+
 location "https://download.eclipse.org/cbi/updates/license" {
 	org.eclipse.license.feature.group lazy
 }

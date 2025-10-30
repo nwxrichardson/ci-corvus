@@ -37,6 +37,8 @@
       <plugin id="org.eclipse.sirius.diagram"/>
       <plugin id="org.eclipse.sirius.diagram.ui"/>
       <plugin id="org.eclipse.sirius.ui"/>
+      <plugin id="psl"/>
+      <plugin id="psl.design"/>
       <plugin id="uk.ac.york.ci.corvus"/>
    </plugins>
 
