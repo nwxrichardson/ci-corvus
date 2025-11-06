@@ -9,4 +9,4 @@ RUN cd test/corvus.product_1.0.0.202510211215 && ls \
 && chmod +x eclipse
 
 
-ENTRYPOINT [ "./test/corvus.product_1.0.0.202510211215/eclipse" ]
+ENTRYPOINT [ "/test/corvus.product_1.0.0.202510211215/eclipse" ]
