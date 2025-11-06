@@ -4,16 +4,5 @@ branding:
   icon: 'box'
   color: 'purple'
 runs:
-  using: docker
-  jobs:
-    build-and-run:
-      runs-on: ubuntu-latest
-      
-      steps:
-      - name: Build Docker image
-        run: |
-          docker build -t ci-corvus:latest .
-       
-      - name: Run Docker container
-        run: |
-          docker run ci-corvus:latest
+  using: 'docker'
+  image: 'Dockerfile'
