@@ -3,10 +3,15 @@ description: 'Generate a comment showing Corvus comparisons'
 branding:
   icon: 'box'
   color: 'purple'
-inputs:
-  github-token: 
-    description: 'A token'
-    required: true
-runs:
-  using: docker
-  image: 'Dockerfile'
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Build Docker image
+      run: |
+        docker build -t ci-corvus:latest .
+     
+    - name: Run Docker container
+      run: |
+        docker run ci-corvus:latest
