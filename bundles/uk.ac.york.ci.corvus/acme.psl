@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="psl" xmi:id="_UZU08IR_Ee6mQtrdkt6ZTA" title="ACME">
+  <tasks xmi:id="_UZU08YR_Ee6mQtrdkt6ZTA" title="Analysis" start="1" duration="3">
+    <effort xmi:id="_UZU08oR_Ee6mQtrdkt6ZTA" person="_UZU0-IR_Ee6mQtrdkt6ZTA"/>
+    <deliverables title="Requirements" due="3" lead="_UZU0-IR_Ee6mQtrdkt6ZTA"/>
+  </tasks>
+  <tasks xmi:id="_UZU084R_Ee6mQtrdkt6ZTA" title="Design" start="4" duration="5" dependencies="_UZU08YR_Ee6mQtrdkt6ZTA">
+    <effort xmi:id="_UZU09IR_Ee6mQtrdkt6ZTA" person="_UZU0-YR_Ee6mQtrdkt6ZTA"/>
+    <deliverables title="Architecture" due="5" lead="_UZU0-YR_Ee6mQtrdkt6ZTA"/>
+    <deliverables title="Low-Level Design" due="8" lead="_UZU0-YR_Ee6mQtrdkt6ZTA"/>
+  </tasks>
+  <tasks xmi:id="_UZU09YR_Ee6mQtrdkt6ZTA" title="Implementation" start="9" duration="3" dependencies="_UZU084R_Ee6mQtrdkt6ZTA">
+    <effort xmi:id="_UZU09oR_Ee6mQtrdkt6ZTA" person="_UZU0-YR_Ee6mQtrdkt6ZTA" percentage="50"/>
+    <effort xmi:id="_UZU094R_Ee6mQtrdkt6ZTA" person="_UZU0-IR_Ee6mQtrdkt6ZTA" percentage="50"/>
+    <deliverables title="Tests" due="12" lead="_UZU0-IR_Ee6mQtrdkt6ZTA"/>
+    <deliverables title="Source Code" due="11" lead="_UZU0-YR_Ee6mQtrdkt6ZTA"/>
+  </tasks>
+  <tasks title="CI" dependencies="_UZU09YR_Ee6mQtrdkt6ZTA"/>
+  <people xmi:id="_UZU0-IR_Ee6mQtrdkt6ZTA" name="Alice"/>
+  <people xmi:id="_UZU0-YR_Ee6mQtrdkt6ZTA" name="Bob"/>
+</Project>

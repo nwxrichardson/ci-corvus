@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="psl" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_18cOEJCcEfCarbzQwIJFtQ" selectedViews="_2oLSsJCcEfCarbzQwIJFtQ" version="14.3.0.201908071200">
+    <semanticResources>acme.psl</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_2oLSsJCcEfCarbzQwIJFtQ">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_4QrhkJCcEfCarbzQwIJFtQ" name="new Tasks Diagram" repPath="#_4QWKYJCcEfCarbzQwIJFtQ" changeId="1757770187242">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']"/>
+        <target xmi:type="Project" href="acme.psl#_UZU08IR_Ee6mQtrdkt6ZTA"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_4QWKYJCcEfCarbzQwIJFtQ">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_4Q9OYJCcEfCarbzQwIJFtQ" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_4Q9OYZCcEfCarbzQwIJFtQ" type="Sirius" element="_4QWKYJCcEfCarbzQwIJFtQ" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_4RtcUJCcEfCarbzQwIJFtQ" type="2001" element="_4RQJUJCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_4R0KAJCcEfCarbzQwIJFtQ" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_4R0KAZCcEfCarbzQwIJFtQ" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4R_JIJCcEfCarbzQwIJFtQ" type="3003" element="_4RTMoJCcEfCarbzQwIJFtQ">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_4R_JIZCcEfCarbzQwIJFtQ" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4R_JIpCcEfCarbzQwIJFtQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_4RtcUZCcEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4RtcUpCcEfCarbzQwIJFtQ" x="82" y="5" width="95" height="52"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_4R97AJCcEfCarbzQwIJFtQ" type="2001" element="_4RWP8JCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_4R-iEJCcEfCarbzQwIJFtQ" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_4R-iEZCcEfCarbzQwIJFtQ" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4R_wMJCcEfCarbzQwIJFtQ" type="3003" element="_4RWP8ZCcEfCarbzQwIJFtQ">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_4R_wMZCcEfCarbzQwIJFtQ" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4R_wMpCcEfCarbzQwIJFtQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_4R97AZCcEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4R97ApCcEfCarbzQwIJFtQ" x="94" y="85" width="87" height="52"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_4R-iEpCcEfCarbzQwIJFtQ" type="2001" element="_4RW3AZCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_4R-iFZCcEfCarbzQwIJFtQ" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_4R-iFpCcEfCarbzQwIJFtQ" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4SAXQJCcEfCarbzQwIJFtQ" type="3003" element="_4RW3ApCcEfCarbzQwIJFtQ">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_4SAXQZCcEfCarbzQwIJFtQ" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SAXQpCcEfCarbzQwIJFtQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_4R-iE5CcEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4R-iFJCcEfCarbzQwIJFtQ" x="55" y="195" width="150" height="52"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_6FzQKJCcEfCarbzQwIJFtQ" type="2001" element="_6Fwz4JCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_6F0eQJCcEfCarbzQwIJFtQ" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_6F0eQZCcEfCarbzQwIJFtQ" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_6F1FUJCcEfCarbzQwIJFtQ" type="3003" element="_6Fwz4ZCcEfCarbzQwIJFtQ">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_6F1FUZCcEfCarbzQwIJFtQ" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6F1FUpCcEfCarbzQwIJFtQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_6FzQKZCcEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6FzQKpCcEfCarbzQwIJFtQ" x="645" y="240" width="181" height="61"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_4Q9OYpCcEfCarbzQwIJFtQ"/>
+        <edges xmi:type="notation:Edge" xmi:id="_4SQ18JCcEfCarbzQwIJFtQ" type="4001" element="_4RdksJCcEfCarbzQwIJFtQ" source="_4R97AJCcEfCarbzQwIJFtQ" target="_4RtcUJCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_4SSEEJCcEfCarbzQwIJFtQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SSEEZCcEfCarbzQwIJFtQ" x="2" y="-2"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4STSMJCcEfCarbzQwIJFtQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4STSMZCcEfCarbzQwIJFtQ" x="2" y="2"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4STSMpCcEfCarbzQwIJFtQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4STSM5CcEfCarbzQwIJFtQ" y="2"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_4SQ18ZCcEfCarbzQwIJFtQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_4SQ18pCcEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4SQ185CcEfCarbzQwIJFtQ" points="[0, 0, 8, 28]$[-8, -28, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4SZY0JCcEfCarbzQwIJFtQ" id="(0.5,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4SZY0ZCcEfCarbzQwIJFtQ" id="(0.5,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_4SZ_4JCcEfCarbzQwIJFtQ" type="4001" element="_4RfZ4pCcEfCarbzQwIJFtQ" source="_4R-iEpCcEfCarbzQwIJFtQ" target="_4R97AJCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_4SZ_5JCcEfCarbzQwIJFtQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SZ_5ZCcEfCarbzQwIJFtQ" x="-7"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4SZ_5pCcEfCarbzQwIJFtQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SZ_55CcEfCarbzQwIJFtQ" x="8" y="-2"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4SZ_6JCcEfCarbzQwIJFtQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SZ_6ZCcEfCarbzQwIJFtQ" x="8" y="-1"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_4SZ_4ZCcEfCarbzQwIJFtQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_4SZ_4pCcEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4SZ_45CcEfCarbzQwIJFtQ" points="[0, 0, -7, 58]$[7, -58, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4Sam8JCcEfCarbzQwIJFtQ" id="(0.5,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4Sam8ZCcEfCarbzQwIJFtQ" id="(0.5,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_Vc_qwJCdEfCarbzQwIJFtQ" type="4001" element="_Vc9OiJCdEfCarbzQwIJFtQ" source="_6FzQKJCcEfCarbzQwIJFtQ" target="_4R-iEpCcEfCarbzQwIJFtQ">
+          <children xmi:type="notation:Node" xmi:id="_VdAR0JCdEfCarbzQwIJFtQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VdAR0ZCdEfCarbzQwIJFtQ" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_VdAR0pCdEfCarbzQwIJFtQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VdAR05CdEfCarbzQwIJFtQ" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_VdAR1JCdEfCarbzQwIJFtQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VdAR1ZCdEfCarbzQwIJFtQ" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_Vc_qwZCdEfCarbzQwIJFtQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_Vc_qwpCdEfCarbzQwIJFtQ" fontName="Segoe UI" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Vc_qw5CdEfCarbzQwIJFtQ" points="[0, 0, 440, 50]$[-440, -50, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VdAR1pCdEfCarbzQwIJFtQ" id="(0.0,0.5737704918032787)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VdAR15CdEfCarbzQwIJFtQ" id="(1.0,0.5769230769230769)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_4RgA8JCcEfCarbzQwIJFtQ" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_4RgA8ZCcEfCarbzQwIJFtQ"/>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_4RQJUJCcEfCarbzQwIJFtQ" name="Analysis" incomingEdges="_4RdksJCcEfCarbzQwIJFtQ" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="Task" href="acme.psl#_UZU08YR_Ee6mQtrdkt6ZTA"/>
+      <semanticElements xmi:type="Task" href="acme.psl#_UZU08YR_Ee6mQtrdkt6ZTA"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_4RTMoJCcEfCarbzQwIJFtQ" labelSize="12" labelPosition="node" color="181,254,254">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_4RWP8JCcEfCarbzQwIJFtQ" name="Design" outgoingEdges="_4RdksJCcEfCarbzQwIJFtQ" incomingEdges="_4RfZ4pCcEfCarbzQwIJFtQ" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="Task" href="acme.psl#_UZU084R_Ee6mQtrdkt6ZTA"/>
+      <semanticElements xmi:type="Task" href="acme.psl#_UZU084R_Ee6mQtrdkt6ZTA"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_4RWP8ZCcEfCarbzQwIJFtQ" labelSize="12" labelPosition="node" color="181,254,254">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_4RW3AZCcEfCarbzQwIJFtQ" name="Implementation" outgoingEdges="_4RfZ4pCcEfCarbzQwIJFtQ" incomingEdges="_Vc9OiJCdEfCarbzQwIJFtQ" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="Task" href="acme.psl#_UZU09YR_Ee6mQtrdkt6ZTA"/>
+      <semanticElements xmi:type="Task" href="acme.psl#_UZU09YR_Ee6mQtrdkt6ZTA"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_4RW3ApCcEfCarbzQwIJFtQ" labelSize="12" labelPosition="node" color="181,254,254">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_6Fwz4JCcEfCarbzQwIJFtQ" name="CI" outgoingEdges="_Vc9OiJCdEfCarbzQwIJFtQ" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="Task" href="acme.psl#//@tasks.3"/>
+      <semanticElements xmi:type="Task" href="acme.psl#//@tasks.3"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_6Fwz4ZCcEfCarbzQwIJFtQ" labelSize="12" labelPosition="node" color="181,254,254">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@nodeMappings[name='psl.tasks.taskNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_4RdksJCcEfCarbzQwIJFtQ" sourceNode="_4RWP8JCcEfCarbzQwIJFtQ" targetNode="_4RQJUJCcEfCarbzQwIJFtQ">
+      <target xmi:type="Task" href="acme.psl#_UZU084R_Ee6mQtrdkt6ZTA"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_4ReLwJCcEfCarbzQwIJFtQ" lineStyle="dash" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@edgeMappings[name='psl.tasks.dependencyEdge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_4ReLwZCcEfCarbzQwIJFtQ" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@edgeMappings[name='psl.tasks.dependencyEdge']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_4RfZ4pCcEfCarbzQwIJFtQ" sourceNode="_4RW3AZCcEfCarbzQwIJFtQ" targetNode="_4RWP8JCcEfCarbzQwIJFtQ">
+      <target xmi:type="Task" href="acme.psl#_UZU09YR_Ee6mQtrdkt6ZTA"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_4RfZ45CcEfCarbzQwIJFtQ" lineStyle="dash" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@edgeMappings[name='psl.tasks.dependencyEdge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_4RfZ5JCcEfCarbzQwIJFtQ" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@edgeMappings[name='psl.tasks.dependencyEdge']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Vc9OiJCdEfCarbzQwIJFtQ" sourceNode="_6Fwz4JCcEfCarbzQwIJFtQ" targetNode="_4RW3AZCcEfCarbzQwIJFtQ">
+      <target xmi:type="Task" href="acme.psl#//@tasks.3"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Vc91kJCdEfCarbzQwIJFtQ" lineStyle="dash" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@edgeMappings[name='psl.tasks.dependencyEdge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Vc91kZCdEfCarbzQwIJFtQ" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@edgeMappings[name='psl.tasks.dependencyEdge']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_4Qi-sJCcEfCarbzQwIJFtQ"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/psl.design/description/psl.odesign#//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer"/>
+    <target xmi:type="Project" href="acme.psl#_UZU08IR_Ee6mQtrdkt6ZTA"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

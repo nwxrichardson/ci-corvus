@@ -1,5 +1,6 @@
 package uk.ac.york.ci.corvus;
 
+import java.io.File;
 import java.util.Map;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -32,7 +33,7 @@ public class CorvusRunner implements IApplication {
 
 	private Object run(Object argsArray) {
 		 // Get session from an absolute path (not in a workspace)
-        URI sessionResourceURI = URI.createFileURI("C:/Users/nr823/git/psl-ci/psl.example/acme.aird");
+        URI sessionResourceURI = URI.createFileURI("C:/Users/nr823/git/CI-Corvus/bundles/uk.ac.york.ci.corvus/acme.aird");
         Session session = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
 		try {
 			
@@ -43,7 +44,7 @@ public class CorvusRunner implements IApplication {
 	        DRepresentation representation = representationDesc.getRepresentation();
 //	         Export it as SVG image
 	        ExportFormat exportFormat = new ExportFormat(ExportDocumentFormat.NONE, ImageFileFormat.PNG);
-	        ExportResult exp = DialectUIManager.INSTANCE.exportWithResult(representation, session, new Path("C:/Users/nr823/git/psl-ci/psl.example/image.png"), exportFormat,
+	        ExportResult exp = DialectUIManager.INSTANCE.exportWithResult(representation, session, new Path("C:/Users/nr823/git/CI-Corvus/bundles/uk.ac.york.ci.corvus/image.png"), exportFormat,
 			        new NullProgressMonitor());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
