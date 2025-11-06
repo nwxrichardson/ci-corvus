@@ -4,7 +4,7 @@ branding:
   icon: 'box'
   color: 'purple'
 runs:
-  using: docket
+  using: docker
   jobs:
     build-and-run:
       runs-on: ubuntu-latest
