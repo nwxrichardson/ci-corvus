@@ -21,5 +21,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  COPY ./docker-entrypoint.sh ./docker-entrypoint.sh
  RUN dos2unix ./docker-entrypoint.sh && chmod +x ./docker-entrypoint.sh
 
-ENTRYPOINT [ "./docker-entrypoint.sh" ]
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
