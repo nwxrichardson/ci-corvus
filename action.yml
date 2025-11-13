@@ -21,4 +21,7 @@ runs:
     - name: Docker run
       run : docker run -v $(pwd)/bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
       shell: bash
-  
+    - name: Create comment from markdown file
+      uses: GrantBirki/comment@v2.1.1
+      with:
+        file: demo/plain-sample.md
