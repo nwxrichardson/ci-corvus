@@ -4,7 +4,9 @@ branding:
   icon: 'box'
   color: 'purple'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  volumes:
-    - ${{ github.workspace }}/bundles/uk.ac.york.ci.corvus/:/example
+  using: 'composite'
+    - name: Checkout
+        uses: actions/checkout@v4
+    - name: Docker
+      container:
+      image: 'Dockerfile'
