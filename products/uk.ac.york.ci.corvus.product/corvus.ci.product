@@ -3,7 +3,6 @@
 
 <product name="Corvus Product" uid="uk.ac.york.ci.corvus.product" application="uk.ac.york.ci.corvus.corvusRunner" version="1.0.0" type="mixed" includeLaunchers="true" autoIncludeRequirements="true">
 
-
    <configIni use="">
    </configIni>
 
@@ -12,20 +11,17 @@
 
    <windowImages/>
 
-
    <launcher>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
-
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21</linux>
       <macos include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21</macos>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21</windows>
    </vm>
-
 
    <plugins>
       <plugin id="org.eclipse.core.resources"/>
@@ -37,8 +33,6 @@
       <plugin id="org.eclipse.sirius.diagram"/>
       <plugin id="org.eclipse.sirius.diagram.ui"/>
       <plugin id="org.eclipse.sirius.ui"/>
-      <plugin id="psl"/>
-      <plugin id="psl.design"/>
       <plugin id="uk.ac.york.ci.corvus"/>
    </plugins>
 

@@ -14,3 +14,4 @@ Require-Bundle: org.eclipse.equinox.app,
  org.eclipse.sirius.diagram.ui;bundle-version="7.4.12"
 Automatic-Module-Name: uk.ac.york.ci.corvus
 Bundle-RequiredExecutionEnvironment: JavaSE-21
+Import-Package: org.eclipse.ui.internal.progress

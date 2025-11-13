@@ -32,7 +32,7 @@
 	    <product>
 	      <id>uk.ac.york.ci.corvus.product</id>
 	      <attachId>uk.ac.york.ci.corvus.productmv</attachId>
-	      <rootFolder>corvus.product_${qualifiedVersion}</rootFolder>
+	      <rootFolder>corvus.product_${unqualifiedVersion}</rootFolder>
 	    </product>
 	  </products>
 	</configuration>	

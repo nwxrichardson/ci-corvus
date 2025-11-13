@@ -44,7 +44,7 @@
                 <phase>package</phase>
                 <id>package-feature</id>
                     <configuration>
-                        <finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+                        <finalName>${project.artifactId}_${unqualifiedVersion}</finalName>
                     </configuration>
             </execution>
         </executions>

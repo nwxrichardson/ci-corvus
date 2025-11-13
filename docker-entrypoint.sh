@@ -1,7 +1,13 @@
 #!/bin/bash
 
-LAUNCHERJAR=$(ls -1 /epsilon/plugins/org.eclipse.equinox.launcher_*.jar | head -1)
-WORKSPACE="/workspace/"
+apt-get -y install libgtk-4-1
+apt-get -y install xvfb
+apt-get -y install libxtst-dev
 
+Xvfb :100 -ac &
+export DISPLAY=:100
+
+cd ./test/corvus.product_1.0.0
+./eclipse
 
 exit 0
