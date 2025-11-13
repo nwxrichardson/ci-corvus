@@ -19,6 +19,6 @@ runs:
       run : ls
       shell: bash
     - name: Docker run
-      run : docker run -v /bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
+      run : docker run -v $(pwd)/bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
       shell: bash
   
