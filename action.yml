@@ -3,7 +3,7 @@ description: 'Generate a comment showing Corvus comparisons'
 branding:
   icon: 'box'
   color: 'purple'
-runs:
+jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
