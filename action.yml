@@ -13,8 +13,8 @@ runs:
     - name: Docker
       run : docker build -t ci-corvus:latest . 
       shell: bash
-    - name: Checkout current repo
-      uses: actions/checkout@v4
+#    - name: Checkout current repo
+#      uses: actions/checkout@v4
     - name: List
       run : ls
       shell: bash
