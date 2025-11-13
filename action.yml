@@ -9,5 +9,6 @@ runs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Docker
+      uses: shell
       run : docker build -t ci-corvus:latest . 
   
