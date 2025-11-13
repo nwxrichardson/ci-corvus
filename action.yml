@@ -5,6 +5,6 @@ branding:
   color: 'purple'
 runs:
   using: 'docker'
-    image: 'Dockerfile'
-    volumes:
-          - ${{ github.workspace }}/bundles/uk.ac.york.ci.corvus/:/example
+  image: 'Dockerfile'
+  volumes:
+    - ${{ github.workspace }}/bundles/uk.ac.york.ci.corvus/:/example
