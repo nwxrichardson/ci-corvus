@@ -9,5 +9,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Docker
-      container:
-      image: 'Dockerfile'
+      uses: addnab/docker-run-action@v3
+        with:
+          image: 'Dockerfile'
+          options: -v ${{ github.workspace }}:/var/www
+  
