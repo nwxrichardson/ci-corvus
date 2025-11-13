@@ -8,6 +8,8 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with: 
+        repository: nwxrichardson/ci-corvus
     - name: List
       run : ls
       shell: bash
