@@ -5,8 +5,9 @@ branding:
   color: 'purple'
 runs:
   using: 'composite'
+  steps:
     - name: Checkout
-        uses: actions/checkout@v4
+      uses: actions/checkout@v4
     - name: Docker
       container:
       image: 'Dockerfile'
