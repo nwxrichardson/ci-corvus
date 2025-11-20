@@ -32,7 +32,7 @@ runs:
    #   git commit -m "Add new file"
    #   shell: bash
     - name: List
-      run : cd bundles && ls
+      run : cd bundles && tree
       shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
