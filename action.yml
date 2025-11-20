@@ -23,10 +23,9 @@ runs:
       shell: bash
     - name: Generate API module
       run: |
-        git clone https://user:$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action # This works
+        git clone https://$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action # This works
 
         cd sirius-pr-action
-        git config nwxrichardson "user"
 
         touch image.png
         git add image.png
