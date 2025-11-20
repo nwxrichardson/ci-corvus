@@ -21,16 +21,16 @@ runs:
     - name: Docker run
       run : docker run -v $(pwd)/bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
       shell: bash
-    - name: Generate API module
-      run: |
-        git clone https://nwxrichardson:$TOKEN@github.com/epsilonlabs/sirius-pr-action.git
+   # - name: Upload Image
+   #   run: |
+   #   git clone https://nwxrichardson:$TOKEN@github.com/epsilonlabs/sirius-pr-action.git
 
-        cd sirius-pr-action
+   #   cd sirius-pr-action
 
-        touch image.png
-        git add image.png
-        git commit -m "Add new file"
-      shell: bash
+   #   touch image.png
+   #   git add image.png
+   #   git commit -m "Add new file"
+   #   shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
