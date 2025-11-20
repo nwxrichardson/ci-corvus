@@ -1,5 +1,7 @@
 package uk.ac.york.ci.corvus;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Map;
 
 import org.eclipse.core.internal.resources.Workspace;
@@ -56,6 +58,9 @@ public class CorvusRunner implements IApplication {
 //	        Path path = new Path("C:\\Users\\nr823\\git\\CI-Corvus\\bundles\\uk.ac.york.ci.corvus\\acme.png");
 	        dm.export(representation, session, path, exportFormat,
 	        		new NullProgressMonitor());
+	        File mdFile = new File("/test/plain-sample.md");
+	        FileWriter mdWriter = new FileWriter(mdFile);
+	        mdWriter.write("# From Java \n ![image.png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/image.png)");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
