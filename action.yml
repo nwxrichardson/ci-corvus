@@ -31,7 +31,7 @@ runs:
    #   git add image.png
    #   git commit -m "Add new file"
    #   shell: bash
-   - name: CAT
+    - name: CAT
       run : cat /test/plain-sample.md
       shell: bash
     - name: Create comment from markdown file
