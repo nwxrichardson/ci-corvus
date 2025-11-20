@@ -21,6 +21,18 @@ runs:
     - name: Docker run
       run : docker run -v $(pwd)/bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
       shell: bash
+    - name: Generate API module
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git clone https://user:$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action # This works
+
+        cd sirius-pr-action
+        git config nwxrichardson "user"
+
+        touch new-file.sh
+        git add new-file.sh
+        git commit -m "Add new file"
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
