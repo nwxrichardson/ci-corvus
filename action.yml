@@ -23,7 +23,7 @@ runs:
       shell: bash
     - name: Generate API module
       run: |
-        git clone https://user:$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action.git
+        git clone https://nxwrichardson:$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action.git
 
         cd sirius-pr-action
 
