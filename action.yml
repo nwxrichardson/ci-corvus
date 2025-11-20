@@ -31,9 +31,6 @@ runs:
    #   git add image.png
    #   git commit -m "Add new file"
    #   shell: bash
-    - name: CAT
-      run : cat $(pwd)/bundles/uk.ac.york.ci.corvus/plain-sample.md
-      shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
