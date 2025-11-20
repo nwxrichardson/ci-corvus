@@ -58,9 +58,11 @@ public class CorvusRunner implements IApplication {
 //	        Path path = new Path("C:\\Users\\nr823\\git\\CI-Corvus\\bundles\\uk.ac.york.ci.corvus\\acme.png");
 	        dm.export(representation, session, path, exportFormat,
 	        		new NullProgressMonitor());
-	        File mdFile = new File("/test/plain-sample.md");
+	        File mdFile = new File("/example/plain-sample.md");
+	        mdFile.createNewFile();
 	        FileWriter mdWriter = new FileWriter(mdFile);
 	        mdWriter.write("# From Java \n ![image.png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/image.png)");
+	        mdWriter.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
