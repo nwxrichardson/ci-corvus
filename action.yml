@@ -24,4 +24,4 @@ runs:
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
-        file: demo/plain-sample.md
+        file: test/plain-sample.md
