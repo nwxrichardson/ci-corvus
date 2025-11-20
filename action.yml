@@ -22,8 +22,6 @@ runs:
       run : docker run -v $(pwd)/bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
       shell: bash
     - name: Generate API module
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git clone https://user:$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action # This works
 
