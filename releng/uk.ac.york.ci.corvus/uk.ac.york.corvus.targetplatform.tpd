@@ -4,7 +4,7 @@ location "https://download.eclipse.org/cbi/updates/license" {
 	org.eclipse.license.feature.group lazy
 }
 
-location "https://download.eclipse.org/releases/2025-12" {
+location "https://download.eclipse.org/releases/2025-09" {
 	org.eclipse.e4.core.tools.feature.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
 	org.eclipse.emf.validation.sdk.feature.group lazy
@@ -18,6 +18,8 @@ location "https://download.eclipse.org/releases/2025-12" {
 	org.eclipse.egit.feature.group lazy
 	org.eclipse.ocl.all.sdk.feature.group lazy
 	org.eclipse.gmf.feature.group lazy
+	org.eclipse.sirius.aql.feature.group lazy
+	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.specifier.feature.group lazy
 	org.eclipse.sirius.specifier.properties.feature.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy

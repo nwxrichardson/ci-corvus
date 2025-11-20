@@ -11,6 +11,7 @@
 
    <windowImages/>
 
+
    <launcher>
       <win useIco="false">
          <bmp/>
@@ -24,8 +25,10 @@
    </vm>
 
    <plugins>
-      <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.apache.felix.scr"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.sirius"/>
@@ -33,11 +36,15 @@
       <plugin id="org.eclipse.sirius.diagram"/>
       <plugin id="org.eclipse.sirius.diagram.ui"/>
       <plugin id="org.eclipse.sirius.ui"/>
+      <plugin id="psl"/>
+      <plugin id="psl.design"/>
+      <plugin id="psl.edit"/>
       <plugin id="uk.ac.york.ci.corvus"/>
    </plugins>
 
    <configurations>
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.felix.scr" autoStart="true" startLevel="0" />
    </configurations>
 
    <preferencesInfo>
