@@ -1,2 +1,2 @@
 # Testing
-![https://github.com/epsilonlabs/sirius-pr-action/blob/main/image.png?raw=true](https://github.com/epsilonlabs/sirius-pr-action/blob/main/image.png?raw=true)
+![image.png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/image.png)
