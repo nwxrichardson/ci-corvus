@@ -34,4 +34,4 @@ runs:
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
-        file: /bundles/uk.ac.york.ci.corvus/plain-sample.md
+        file: bundles/uk.ac.york.ci.corvus/plain-sample.md
