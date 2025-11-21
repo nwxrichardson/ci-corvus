@@ -21,9 +21,9 @@ runs:
     - name: Docker run
       run : docker run -v $(pwd)/bundles/uk.ac.york.ci.corvus/:/example ci-corvus:latest
       shell: bash
-   # - name: Upload Image
-   #   run: |
-   #   git clone https://nwxrichardson:$TOKEN@github.com/epsilonlabs/sirius-pr-action.git
+    - name: Upload Image
+      run: |
+        git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/epsilonlabs/sirius-pr-action.git
 
    #   cd sirius-pr-action
 
