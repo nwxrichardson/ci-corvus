@@ -25,7 +25,7 @@ runs:
       run : docker build -t ci-corvus:latest . 
       shell: bash
     - name: Docker run
-      run : docker run -v $(pwd)/model/bundles/psl.example:/example ci-corvus:latest
+      run : docker run -v $(pwd)/new-model/bundles/psl.example:/example ci-corvus:latest
       shell: bash
     - name: Docker run
       run : tree
@@ -37,4 +37,4 @@ runs:
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
-        file: model/bundles/psl.example/plain-sample.md
+        file: new-model/bundles/psl.example/plain-sample.md
