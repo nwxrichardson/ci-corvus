@@ -11,7 +11,6 @@
 
    <windowImages/>
 
-
    <launcher>
       <win useIco="false">
          <bmp/>
@@ -25,12 +24,16 @@
    </vm>
 
    <plugins>
-      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.apache.felix.gogo.runtime"/>
+      <plugin id="org.apache.felix.gogo.shell"/>
+      <plugin id="org.apache.felix.scr"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.resources"/>
-      <plugin id="org.apache.felix.scr"/>
+      <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.console"/>
       <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.sirius"/>
       <plugin id="org.eclipse.sirius.common"/>
       <plugin id="org.eclipse.sirius.diagram"/>
@@ -43,8 +46,8 @@
    </plugins>
 
    <configurations>
-      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.apache.felix.scr" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
    </configurations>
 
    <preferencesInfo>
