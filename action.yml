@@ -28,7 +28,7 @@ runs:
       run : docker build -t ci-corvus:latest . 
       shell: bash
     - name: Docker run
-      run : docker run -v $(pwd)/model/new/bundles/psl.example:/example/new -v $(pwd)/model/old/bundles/psl.example:/example/old ci-corvus:latest
+      run : docker run -v $(pwd)/output:/example/ -v $(pwd)/model/new/bundles/psl.example:/example/new -v $(pwd)/model/old/bundles/psl.example:/example/old ci-corvus:latest
       shell: bash
     - name: Docker run
       run : tree
