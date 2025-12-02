@@ -14,13 +14,17 @@ runs:
       uses: actions/checkout@v4
       with: 
         repository: epsilonlabs/sirius-pr-action-workspace
-        path: new-model
+        path: model/new
+        sparse-checkout: |
+          bundles/psl.example
     - name: Checkout ci-corvus
       uses: actions/checkout@v4
       with: 
         repository: epsilonlabs/sirius-pr-action-workspace
-        path: old-model
+        path: model/old
         ref: main
+        sparse-checkout: |
+          bundles/psl.example
     - name: Docker run
       run : tree
       shell: bash
