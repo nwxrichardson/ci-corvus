@@ -17,7 +17,7 @@ runs:
         path: model/new
         sparse-checkout-cone-mode: 'false'
         sparse-checkout: |
-          bundles/psl.example
+          bundles/psl.example/*
     - name: Checkout ci-corvus
       uses: actions/checkout@v4
       with: 
