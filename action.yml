@@ -40,4 +40,4 @@ runs:
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
-        file: new-model/bundles/psl.example/plain-sample.md
+        file: output/plain-sample.md
