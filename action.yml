@@ -15,18 +15,12 @@ runs:
       with: 
         repository: epsilonlabs/sirius-pr-action-workspace
         path: model/new
-        sparse-checkout-cone-mode: 'false'
-        sparse-checkout: |
-          bundles/psl.example/*
     - name: Checkout ci-corvus
       uses: actions/checkout@v4
       with: 
         repository: epsilonlabs/sirius-pr-action-workspace
         path: model/old
         ref: main
-        sparse-checkout-cone-mode: 'false'
-        sparse-checkout: |
-          bundles/psl.example
     - name: Docker run
       run : tree
       shell: bash
@@ -34,7 +28,7 @@ runs:
       run : docker build -t ci-corvus:latest . 
       shell: bash
     - name: Docker run
-      run : docker run -v $(pwd)/new-model/bundles/psl.example:/example ci-corvus:latest
+      run : docker run -v $(pwd)/model/new/bundles/psl.example:/example/new -v $(pwd)/model/old/bundles/psl.example:/example/old ci-corvus:latest
       shell: bash
     - name: Docker run
       run : tree
