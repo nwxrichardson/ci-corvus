@@ -171,12 +171,12 @@ public class CorvusRunner implements IApplication {
 	        
 	        EList<DRepresentationDescriptor> newDescriptors = newView.getOwnedRepresentationDescriptors();
 	        for (DRepresentationDescriptor oldDescriptor : oldView.getOwnedRepresentationDescriptors()) {
-	        	mdWriter.write("![image.png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old-"+ getFileName(oldDescriptor) + ".png)   ");
+	        	mdWriter.write("![" + getFileName(oldDescriptor) + ".png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old-"+ getFileName(oldDescriptor) + ".png)   ");
 	        	
 	        	for (DRepresentationDescriptor newDescriptor : oldView.getOwnedRepresentationDescriptors()) {
 	        		if (oldDescriptor.getDescription().getName() == newDescriptor.getDescription().getName() 
 	        				&& comparison.getMatch(oldDescriptor.getTarget()) == comparison.getMatch(newDescriptor.getTarget()))  {
-	        			mdWriter.write("![image.png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new-"+ getFileName(newDescriptor) + ".png) \n");
+	        			mdWriter.write("![" + getFileName(newDescriptor) +  ".png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new-"+ getFileName(newDescriptor) + ".png) \n");
 	        			break;
 	        		}
 	        	}
