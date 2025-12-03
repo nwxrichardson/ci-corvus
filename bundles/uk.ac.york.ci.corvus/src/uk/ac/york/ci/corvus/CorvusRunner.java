@@ -13,7 +13,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform.OS;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.DiffBuilder;
@@ -34,14 +33,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.ArrangeRequest;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.gef.EditPart;
@@ -49,11 +46,9 @@ import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.session.DefaultLocalSessionCreationOperation;
 import org.eclipse.sirius.business.api.session.Session;
-import org.eclipse.sirius.business.api.session.factory.SessionFactory;
 import org.eclipse.sirius.common.tools.api.resource.ImageFileFormat;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.business.internal.dialect.DiagramDialect;
-import org.eclipse.sirius.diagram.description.DescriptionPackage;
 import org.eclipse.sirius.diagram.ui.business.api.view.SiriusGMFHelper;
 import org.eclipse.sirius.diagram.ui.business.internal.dialect.DiagramDialectUI;
 import org.eclipse.sirius.diagram.ui.tools.internal.part.OffscreenEditPartFactory;
@@ -67,7 +62,6 @@ import org.eclipse.sirius.ui.tools.api.actions.export.SizeTooLargeException;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.DView;
-import org.eclipse.sirius.viewpoint.ViewpointPackage;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.swt.widgets.Shell;
@@ -77,6 +71,7 @@ public class CorvusRunner implements IApplication {
 	private IProgressMonitor progressMonitor;
 //	private final String OS_PATH = "C:/Users/nr823/git/sirius-pr-action-workspace/bundles/psl.example/";
 	private final String OS_PATH = "/example/";
+	private final String OUT_PATH= "/output/";
 
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
@@ -163,7 +158,7 @@ public class CorvusRunner implements IApplication {
 				exportRep("new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, duim);
 			}
 			
-	        File mdFile = new File(OS_PATH + "plain-sample.md");
+	        File mdFile = new File(OUT_PATH + "plain-sample.md");
 	        mdFile.createNewFile();
 	        FileWriter mdWriter = new FileWriter(mdFile);
 	        
@@ -249,7 +244,7 @@ public class CorvusRunner implements IApplication {
 	
 	private void exportRep(String path, DRepresentation representation, Session session, DialectUIServices dialectUIManager) {
 		   ExportFormat exportFormat = new ExportFormat(ExportDocumentFormat.NONE, ImageFileFormat.PNG);
-	       Path exportPath = new Path(OS_PATH + path);
+	       Path exportPath = new Path(OUT_PATH + path);
 		   try {
 			dialectUIManager.export(representation, session, exportPath, exportFormat,
 			    		progressMonitor);
