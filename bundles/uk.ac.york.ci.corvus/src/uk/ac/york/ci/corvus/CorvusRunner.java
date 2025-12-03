@@ -94,6 +94,9 @@ public class CorvusRunner implements IApplication {
         
 		try {
 			
+			new File(OUT_PATH+"old/").mkdirs();
+			new File(OUT_PATH+"new/").mkdirs();
+			
 			DefaultLocalSessionCreationOperation oldCreation = new DefaultLocalSessionCreationOperation(oldSessionResourceURI, progressMonitor);
 			oldCreation.execute();
 			Session oldSession = oldCreation.getCreatedSession();
