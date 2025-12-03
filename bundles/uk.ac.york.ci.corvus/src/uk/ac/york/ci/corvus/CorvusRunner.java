@@ -94,8 +94,8 @@ public class CorvusRunner implements IApplication {
         
 		try {
 			
-			new File(OUT_PATH+"old/").mkdirs();
-			new File(OUT_PATH+"new/").mkdirs();
+			new File(OUT_PATH+"model/old/").mkdirs();
+			new File(OUT_PATH+"model/new/").mkdirs();
 			
 			DefaultLocalSessionCreationOperation oldCreation = new DefaultLocalSessionCreationOperation(oldSessionResourceURI, progressMonitor);
 			oldCreation.execute();
@@ -154,11 +154,11 @@ public class CorvusRunner implements IApplication {
 			}
 			
 			for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
-				exportRep("old/old-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), oldSession, duim);
+				exportRep("model/old/old-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), oldSession, duim);
 			}
 			
 			for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
-				exportRep("new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, duim);
+				exportRep("model/new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, duim);
 			}
 			
 	        File mdFile = new File(OUT_PATH + "plain-sample.md");
