@@ -69,7 +69,8 @@ import org.eclipse.swt.widgets.Shell;
 public class CorvusRunner implements IApplication {
 
 	private IProgressMonitor progressMonitor;
-//	private final String OS_PATH = "C:/Users/nr823/git/sirius-pr-action-workspace/bundles/psl.example/";
+//	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
+//	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
 	private final String OS_PATH = "/example/";
 	private final String OUT_PATH= "/output/";
 
@@ -169,13 +170,13 @@ public class CorvusRunner implements IApplication {
 	        
 	        EList<DRepresentationDescriptor> newDescriptors = newView.getOwnedRepresentationDescriptors();
 	        for (DRepresentationDescriptor oldDescriptor : oldView.getOwnedRepresentationDescriptors()) {
-	        	mdWriter.write("![" + getFileName(oldDescriptor) + ".png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?)   ");
+	        	mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
 	        	
 	        	for (DRepresentationDescriptor newDescriptor : oldView.getOwnedRepresentationDescriptors()) {
 	        		if (oldDescriptor.getDescription().getName() == newDescriptor.getDescription().getName() 
 	        				&& comparison.getMatch(oldDescriptor.getTarget()) == comparison.getMatch(newDescriptor.getTarget()))  {
-	        			mdWriter.write("![" + getFileName(newDescriptor) +  ".png](https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?) \n");
-	        			break;
+	        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?\" width=\"50%\">");
+	    	        	break;
 	        		}
 	        	}
 	        	

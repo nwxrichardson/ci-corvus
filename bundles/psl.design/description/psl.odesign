@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="psl" version="12.0.0.201704030900">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="psl" version="12.0.0.2017041100">
   <ownedViewpoints name="MyViewpoint" modelFileExtension="psl">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="psl.tasks.diagram" label="Tasks Diagram" domainClass="psl::Project" enablePopupBars="true">
       <metamodel href="../../psl/psl.ecore#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="psl.tasks.taskNode" label="Task node" labelDirectEdit="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks.diagram']/@defaultLayer/@toolSections.1/@ownedTools[name='psl.tasks.tools.editTaskLabel']" semanticCandidatesExpression="feature:tasks" domainClass="psl::Task">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Task%20Colour']">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" width="-1" height="-1" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Task%20Colour']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
@@ -86,13 +86,13 @@
       <metamodel href="../../psl/psl.ecore#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="psl.diagrams.efforts.nodes.task" label="Task node" semanticCandidatesExpression="feature:tasks" domainClass="psl::Task">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Task%20Colour']">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" width="-1" height="-1" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Task%20Colour']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
         <nodeMappings name="psl.diagrams.efforts.nodes.person" label="Person node" semanticCandidatesExpression="feature:people" domainClass="psl::Person">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Person%20Colour']">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelPosition="node" resizeKind="NSEW" width="-1" height="-1" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Person%20Colour']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
@@ -209,7 +209,7 @@
       <additionalLayers name="psl.tasks2.layers.deliverables" label="Deliverables layer">
         <containerMappings xsi:type="description_1:ContainerMappingImport" name="psl.tasks2.deliverables.task" importedMapping="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='psl.tasks2.diagram']/@defaultLayer/@containerMappings[name='psl.tasks2.nodes.taskContainer']">
           <subNodeMappings name="psl.tasks2.nodes.deliverableSubnode" label="Deliverable subnode" semanticCandidatesExpression="feature:deliverables" domainClass="psl::Deliverable">
-            <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW">
+            <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" width="-1" height="-1">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
@@ -242,7 +242,7 @@
       <metamodel href="../../psl/psl.ecore#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="psl.deliverables.nodes.deliverable" label="Deliverable Node" semanticCandidatesExpression="feature:deliverables" domainClass="psl::Deliverable">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Deliverable%20Colour']">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" width="-1" height="-1" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Deliverable%20Colour']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
