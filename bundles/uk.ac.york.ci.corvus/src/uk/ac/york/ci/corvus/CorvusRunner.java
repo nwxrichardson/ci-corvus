@@ -39,9 +39,11 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.ArrangeRequest;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.session.DefaultLocalSessionCreationOperation;
@@ -51,6 +53,7 @@ import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.business.internal.dialect.DiagramDialect;
 import org.eclipse.sirius.diagram.ui.business.api.view.SiriusGMFHelper;
 import org.eclipse.sirius.diagram.ui.business.internal.dialect.DiagramDialectUI;
+import org.eclipse.sirius.diagram.ui.internal.refresh.GMFHelper;
 import org.eclipse.sirius.diagram.ui.tools.internal.part.OffscreenEditPartFactory;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIServices;
@@ -69,10 +72,10 @@ import org.eclipse.swt.widgets.Shell;
 public class CorvusRunner implements IApplication {
 
 	private IProgressMonitor progressMonitor;
-//	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
-//	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
-	private final String OS_PATH = "/example/";
-	private final String OUT_PATH= "/output/";
+	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
+	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
+//	private final String OS_PATH = "/example/";
+//	private final String OUT_PATH= "/output/";
 
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
@@ -231,17 +234,20 @@ public class CorvusRunner implements IApplication {
 				   Diagram diagram = SiriusGMFHelper.getGmfDiagram((DDiagram) representation);
 				   DiagramEditPart editPart = OffscreenEditPartFactory.getInstance().createDiagramEditPart(diagram, new Shell());
 				   editPart.enableEditMode();
-				   List<EditPart> editParts = new ArrayList<EditPart>();
+				   List<DiagramEditPart> editParts = new ArrayList<DiagramEditPart>();
 				   editParts.add(editPart);
 
 				   ArrangeRequest request = new ArrangeRequest(ActionIds.ACTION_ARRANGE_ALL, LayoutType.DEFAULT);
 				   request.setPartsToArrange(editParts);
 				   editPart.performRequest(request);
-				   
-				   ArrangeRequest request2 = new ArrangeRequest(ActionIds.ACTION_AUTOSIZE, LayoutType.DEFAULT);
-				   request2.setPartsToArrange(editParts);
+				   System.out.println(((DDiagram) representation).getNodes().getFirst().getHeight());
+				   ArrangeRequest request2 = new ArrangeRequest(ActionIds.ACTION_SELECT_ALL_SHAPES);
+				   request.setPartsToArrange(editParts);
 				   editPart.performRequest(request2);
-
+				   
+				   ArrangeRequest request3 = new ArrangeRequest(ActionIds.ACTION_MAKE_SAME_SIZE_BOTH);
+				   request.setPartsToArrange(editParts);
+				   editPart.performRequest(request3);
 			   }   
 		   });
 	}
