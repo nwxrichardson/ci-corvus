@@ -33,10 +33,10 @@ runs:
     - name: Tree
       run : tree
       shell: bash
-#    - name: Upload README to S3
-#      run: |
-#          aws s3 cp --recursive $(pwd)/output/model/ s3://${{ env.BUCKET_NAME }}/model
-#      shell: bash  
+    - name: Upload README to S3
+      run: |
+          aws s3 cp --recursive $(pwd)/output/model/ s3://${{ env.BUCKET_NAME }}/model
+      shell: bash  
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
