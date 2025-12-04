@@ -86,7 +86,7 @@
       <metamodel href="../../psl/psl.ecore#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="psl.diagrams.efforts.nodes.task" label="Task node" semanticCandidatesExpression="feature:tasks" domainClass="psl::Task">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" sizeComputationExpression="" labelPosition="node" resizeKind="NSEW" width="-1" height="-1" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Task%20Colour']">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW" width="-1" height="-1" color="//@userColorsPalettes[name='Custom%20Palette']/@entries[name='Task%20Colour']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
