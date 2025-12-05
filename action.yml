@@ -3,6 +3,9 @@ description: 'Generate a comment showing Corvus comparisons'
 branding:
   icon: 'box'
   color: 'purple'
+inputs: 
+  aird-location:
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -21,17 +24,11 @@ runs:
         repository: epsilonlabs/sirius-pr-action-workspace
         path: model/old
         ref: main
-    - name: Tree
-      run : tree
-      shell: bash
     - name: Docker
       run : docker build -t ci-corvus:latest . 
       shell: bash
     - name: Docker run
-      run : docker run -v $(pwd)/output:/output/ -v $(pwd)/model/new/bundles/psl.example:/example/new -v $(pwd)/model/old/bundles/psl.example:/example/old ci-corvus:latest
-      shell: bash
-    - name: Tree
-      run : tree
+      run : docker run -v $(pwd)/output:/output/ -v $(pwd)/model/new/${{github.event.inputs.aird-location}}:/example/new -v $(pwd)/model/old/bundles/psl.example:/example/old ci-corvus:latest
       shell: bash
     - name: Upload README to S3
       run: |
