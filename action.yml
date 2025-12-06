@@ -1,11 +1,11 @@
 name: 'corvus-comment'
 description: 'Generate a comment showing Corvus comparisons'
-branding:
-  icon: 'box'
-  color: 'purple'
 inputs: 
   aird-location:
     default: ''
+branding:
+  icon: 'box'
+  color: 'purple'
 runs:
   using: 'composite'
   steps:
