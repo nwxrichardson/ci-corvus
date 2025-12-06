@@ -25,11 +25,8 @@ runs:
         repository: epsilonlabs/sirius-pr-action-workspace
         path: model/old
         ref: main
-    - name: Docker
-      run : docker build -t ci-corvus:latest . 
-      shell: bash
     - name: Docker run
-      run : docker run -v $(pwd)/output:/output/ -v $(pwd)/model/new/${{ inputs.aird-location }}:/example/new -v $(pwd)/model/old/${{ inputs.aird-location }}:/example/old ci-corvus:latest
+      run : docker run -v $(pwd)/output:/output/ -v $(pwd)/model/new/${{ inputs.aird-location }}:/example/new -v $(pwd)/model/old/${{ inputs.aird-location }}:/example/old nwrichardson/ci-corvus:latest
       shell: bash
 #    - name: Upload README to S3
 #      run: |
