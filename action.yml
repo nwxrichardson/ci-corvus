@@ -2,6 +2,7 @@ name: 'corvus-comment'
 description: 'Generate a comment showing Corvus comparisons'
 inputs: 
   aird-location:
+    description: 'The location that the aird is currently'
     default: ''
 branding:
   icon: 'box'
