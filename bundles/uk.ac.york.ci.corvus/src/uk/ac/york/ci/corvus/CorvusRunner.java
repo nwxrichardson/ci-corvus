@@ -28,6 +28,7 @@ import org.eclipse.emf.compare.scope.DefaultComparisonScope;
 import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -84,6 +85,8 @@ public class CorvusRunner implements IApplication {
 	}
 
 	private Object run(Object argsArray) {
+		
+		System.out.println(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
 		
 		URI oldSessionResourceURI = URI.createFileURI(OS_PATH + "old/acme.aird");
 		URI newSessionResourceURI = URI.createFileURI(OS_PATH + "new/acme.aird");

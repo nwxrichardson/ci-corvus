@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY ./docker-entrypoint.sh ./docker-entrypoint.sh
 RUN dos2unix ./docker-entrypoint.sh && chmod +x ./docker-entrypoint.sh
 
-COPY ./test ./test
+COPY ./products/uk.ac.york.ci.corvus.product/target/products ./test
 
 RUN cd test \
 && tar -xvzf uk.ac.york.ci.corvus.product-linux.gtk.x86_64.tar.gz
