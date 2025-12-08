@@ -98,10 +98,16 @@ public class CorvusRunner implements IApplication {
 			} 
 		}
 		
-
 		
-		URI oldSessionResourceURI = URI.createFileURI(OS_PATH + "old/acme.aird");
-		URI newSessionResourceURI = URI.createFileURI(OS_PATH + "new/acme.aird");
+		
+		File oldDir = new File(OS_PATH + "old");
+		File newDir = new File(OS_PATH + "new");
+		
+		HashSet<String> airdSet = new HashSet<String>();
+		airdSet.add("aird");
+		
+		URI oldSessionResourceURI = sortFileExtension(airdSet, oldDir).iterator().next();
+		URI newSessionResourceURI = sortFileExtension(airdSet, newDir).iterator().next();
 		Set<Viewpoint> viewpoints = ViewpointRegistry.getInstance().getViewpoints();
 		
         
@@ -118,11 +124,10 @@ public class CorvusRunner implements IApplication {
 			newCreation.execute();
 			Session newSession = newCreation.getCreatedSession();
 			
-			File oldDir = new File(OS_PATH + "old");
-			File newDir = new File(OS_PATH + "new");
 			
-			sortFileExtension(fileExtensions, oldSession, oldDir);
-			sortFileExtension(fileExtensions, newSession, newDir);
+			
+			addAllModels(fileExtensions, oldSession, oldDir);
+			addAllModels(fileExtensions, newSession, newDir);
 						
 			
 			ResourceSet rsNew = newSession.getSemanticResources().iterator().next().getResourceSet();
@@ -211,15 +216,22 @@ public class CorvusRunner implements IApplication {
 		return null;
 		}
 
-	private void sortFileExtension(HashSet<String> fileExtensions, Session session, File dir) {
+	private HashSet<URI> sortFileExtension(HashSet<String> fileExtensions, File dir) {
+		HashSet<URI> URIs = new HashSet<>();
 		for (File file : dir.listFiles()) {
 			String fileName = file.getName();
 			int dotIndex = fileName.lastIndexOf(".");
 			String fileExtension = (dotIndex > 0) ? fileName.substring(dotIndex + 1) : "";
 			if (fileExtensions.contains(fileExtension)) {
-				addSemanticResources(session, URI.createFileURI(file.getPath()));
-				System.out.println(file.getPath());
+				URIs.add(URI.createFileURI(file.getPath()));
 			}
+		}
+		return URIs;
+	}
+	
+	private void addAllModels(HashSet<String> fileExtensions, Session session, File dir) {
+		for (URI uri : sortFileExtension(fileExtensions, dir)) {
+			addSemanticResources(session, uri);
 		}
 	}
 	
