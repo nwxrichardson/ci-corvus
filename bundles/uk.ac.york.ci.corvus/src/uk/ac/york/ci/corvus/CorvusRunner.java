@@ -27,8 +27,9 @@ import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
 import org.eclipse.emf.compare.scope.DefaultComparisonScope;
 import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -78,7 +79,6 @@ public class CorvusRunner implements IApplication {
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
 		context.applicationRunning();
-		System.out.println(context.getArguments());
 		Map<String, Object> contextArguments = context.getArguments();
 		progressMonitor = new NullProgressMonitor();
 		return run(contextArguments.get(IApplicationContext.APPLICATION_ARGS));
@@ -86,14 +86,24 @@ public class CorvusRunner implements IApplication {
 
 	private Object run(Object argsArray) {
 		
-		System.out.println(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
+		HashSet<String> fileExtensions = new HashSet<String>();
+		
+		for (Object o: Registry.INSTANCE.values()) {
+			if (o instanceof EPackage) {
+				EPackage ePackage = (EPackage) o;
+				fileExtensions.add(ePackage.getName());
+			} else if (o instanceof EPackage.Descriptor) {
+				EPackage.Descriptor descriptor = (EPackage.Descriptor) o;
+				fileExtensions.add(descriptor.getEPackage().getName());
+			} 
+		}
+		
+
 		
 		URI oldSessionResourceURI = URI.createFileURI(OS_PATH + "old/acme.aird");
 		URI newSessionResourceURI = URI.createFileURI(OS_PATH + "new/acme.aird");
-		URI oldSemanticResourceURI = URI.createFileURI(OS_PATH + "old/acme.psl");
-		URI newSemanticResourceURI = URI.createFileURI(OS_PATH + "new/acme.psl");
 		Set<Viewpoint> viewpoints = ViewpointRegistry.getInstance().getViewpoints();
-        
+		
         
 		try {
 			
@@ -108,8 +118,12 @@ public class CorvusRunner implements IApplication {
 			newCreation.execute();
 			Session newSession = newCreation.getCreatedSession();
 			
-			addSemanticResources(newSession, newSemanticResourceURI);
-			addSemanticResources(oldSession, oldSemanticResourceURI);
+			File oldDir = new File(OS_PATH + "old");
+			File newDir = new File(OS_PATH + "new");
+			
+			sortFileExtension(fileExtensions, oldSession, oldDir);
+			sortFileExtension(fileExtensions, newSession, newDir);
+						
 			
 			ResourceSet rsNew = newSession.getSemanticResources().iterator().next().getResourceSet();
 			ResourceSet rsOld = oldSession.getSemanticResources().iterator().next().getResourceSet();
@@ -138,7 +152,9 @@ public class CorvusRunner implements IApplication {
 			for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
 				EObject eObject = comparison.getMatch(descriptor.getTarget()).getLeft();
 				RepresentationDescription rd = oldRepMap.get(descriptor.getDescription().getName());
-				if (!containsRep(eObject, rd, oldView)) {
+				if (eObject == null) {
+					
+				} else if (!containsRep(eObject, rd, oldView)) {
 					createFormattedRep(oldSession, eObject, rd, duim, dm);
 				}
 				
@@ -151,7 +167,9 @@ public class CorvusRunner implements IApplication {
 			for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
 				EObject eObject = comparison.getMatch(descriptor.getTarget()).getRight();
 				RepresentationDescription rd = newRepMap.get(descriptor.getDescription().getName());
-				if (!containsRep(eObject, rd, newView)) {
+				if (eObject == null) {
+					
+				} else if (!containsRep(eObject, rd, newView)) {
 					createFormattedRep(newSession, eObject, rd, duim, dm);
 				}
 			}
@@ -192,6 +210,18 @@ public class CorvusRunner implements IApplication {
 		}
 		return null;
 		}
+
+	private void sortFileExtension(HashSet<String> fileExtensions, Session session, File dir) {
+		for (File file : dir.listFiles()) {
+			String fileName = file.getName();
+			int dotIndex = fileName.lastIndexOf(".");
+			String fileExtension = (dotIndex > 0) ? fileName.substring(dotIndex + 1) : "";
+			if (fileExtensions.contains(fileExtension)) {
+				addSemanticResources(session, URI.createFileURI(file.getPath()));
+				System.out.println(file.getPath());
+			}
+		}
+	}
 	
 	private String getFileName(DRepresentationDescriptor descriptor) {
 			return descriptor.getDescription().getName() + "-"
@@ -239,7 +269,6 @@ public class CorvusRunner implements IApplication {
 				   ArrangeRequest request = new ArrangeRequest(ActionIds.ACTION_ARRANGE_ALL, LayoutType.DEFAULT);
 				   request.setPartsToArrange(editParts);
 				   editPart.performRequest(request);
-				   System.out.println(((DDiagram) representation).getNodes().getFirst().getHeight());
 				   ArrangeRequest request2 = new ArrangeRequest(ActionIds.ACTION_SELECT_ALL_SHAPES);
 				   request.setPartsToArrange(editParts);
 				   editPart.performRequest(request2);
