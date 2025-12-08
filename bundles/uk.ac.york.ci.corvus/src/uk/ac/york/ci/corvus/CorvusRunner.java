@@ -39,11 +39,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.ArrangeRequest;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.commands.Command;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.session.DefaultLocalSessionCreationOperation;
@@ -53,7 +51,6 @@ import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.business.internal.dialect.DiagramDialect;
 import org.eclipse.sirius.diagram.ui.business.api.view.SiriusGMFHelper;
 import org.eclipse.sirius.diagram.ui.business.internal.dialect.DiagramDialectUI;
-import org.eclipse.sirius.diagram.ui.internal.refresh.GMFHelper;
 import org.eclipse.sirius.diagram.ui.tools.internal.part.OffscreenEditPartFactory;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIServices;
@@ -87,7 +84,6 @@ public class CorvusRunner implements IApplication {
 	}
 
 	private Object run(Object argsArray) {
-		 // Get session from an absolute path (not in a workspace)
 		
 		URI oldSessionResourceURI = URI.createFileURI(OS_PATH + "old/acme.aird");
 		URI newSessionResourceURI = URI.createFileURI(OS_PATH + "new/acme.aird");
