@@ -1,7 +1,10 @@
 package uk.ac.york.ci.corvus;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -50,6 +55,10 @@ import org.eclipse.sirius.business.api.session.DefaultLocalSessionCreationOperat
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.common.tools.api.resource.ImageFileFormat;
 import org.eclipse.sirius.diagram.DDiagram;
+import org.eclipse.sirius.diagram.DDiagramElement;
+import org.eclipse.sirius.diagram.DEdge;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.internal.dialect.DiagramDialect;
 import org.eclipse.sirius.diagram.ui.business.api.view.SiriusGMFHelper;
 import org.eclipse.sirius.diagram.ui.business.internal.dialect.DiagramDialectUI;
@@ -71,10 +80,10 @@ import org.eclipse.swt.widgets.Shell;
 public class CorvusRunner implements IApplication {
 
 	private IProgressMonitor progressMonitor;
-//	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
-//	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
-	private final String OS_PATH = "/example/";
-	private final String OUT_PATH= "/output/";
+	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
+	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
+//	private final String OS_PATH = "/example/";
+//	private final String OUT_PATH= "/output/";
 
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
@@ -88,6 +97,7 @@ public class CorvusRunner implements IApplication {
 		
 		HashSet<String> fileExtensions = new HashSet<String>();
 		
+		// This gets all register file extensions so that the correct model can be used
 		for (Object o: Registry.INSTANCE.values()) {
 			if (o instanceof EPackage) {
 				EPackage ePackage = (EPackage) o;
@@ -99,9 +109,8 @@ public class CorvusRunner implements IApplication {
 		}
 		
 		
-		
-		File oldDir = new File(OS_PATH + "old");
-		File newDir = new File(OS_PATH + "new");
+		File oldDir = new File(OS_PATH, "old");
+		File newDir = new File(OS_PATH, "new");
 		
 		HashSet<String> airdSet = new HashSet<String>();
 		airdSet.add("aird");
@@ -146,9 +155,12 @@ public class CorvusRunner implements IApplication {
 			DialectManager dm = DialectManager.INSTANCE;
 			duim.enableDialectUI(new DiagramDialectUI());
 			dm.enableDialect(new DiagramDialect());
+			
 			oldSession.open(progressMonitor);
+			
 			DView newView = newSession.getSelectedViews().iterator().next();
 			DView oldView = oldSession.getSelectedViews().iterator().next();
+			
 			HashMap<String, RepresentationDescription> oldRepMap = new HashMap<String, RepresentationDescription>();
 			for (RepresentationDescription r : oldSession.getSelectedViewpoints(false).iterator().next().getOwnedRepresentations()) {
 				oldRepMap.put(r.getName(), r);
@@ -181,11 +193,14 @@ public class CorvusRunner implements IApplication {
 			
 			for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
 				exportRep("model/old/old-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), oldSession, duim);
+
 			}
 			
 			for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
 				exportRep("model/new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, duim);
 			}
+			
+			
 			
 	        File mdFile = new File(OUT_PATH + "plain-sample.md");
 	        mdFile.createNewFile();
@@ -195,11 +210,12 @@ public class CorvusRunner implements IApplication {
 	        
 	        EList<DRepresentationDescriptor> newDescriptors = newView.getOwnedRepresentationDescriptors();
 	        for (DRepresentationDescriptor oldDescriptor : oldView.getOwnedRepresentationDescriptors()) {
-	        	mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
 	        	
-	        	for (DRepresentationDescriptor newDescriptor : oldView.getOwnedRepresentationDescriptors()) {
-	        		if (oldDescriptor.getDescription().getName() == newDescriptor.getDescription().getName() 
-	        				&& comparison.getMatch(oldDescriptor.getTarget()) == comparison.getMatch(newDescriptor.getTarget()))  {
+	        	
+	        	for (DRepresentationDescriptor newDescriptor : newDescriptors) {
+	        		if (oldDescriptor.getDescription().getName().equals(newDescriptor.getDescription().getName()) 
+	        				&& imageComparison(oldDescriptor, newDescriptor))  {
+	        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
 	        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?\" width=\"50%\">");
 	    	        	break;
 	        		}
@@ -215,6 +231,33 @@ public class CorvusRunner implements IApplication {
 		}
 		return null;
 		}
+
+	private boolean imageComparison(DRepresentationDescriptor oldDescriptor, DRepresentationDescriptor newDescriptor) {
+		try {
+			File oldFile = new File(OUT_PATH + "model/old/old-" + getFileName(oldDescriptor) + ".png");
+			BufferedImage oldImage = ImageIO.read(oldFile);
+			DataBuffer oldData = oldImage.getData().getDataBuffer();
+			
+			File newFile = new File(OUT_PATH + "model/new/new-" + getFileName(newDescriptor) + ".png");
+			BufferedImage newImage = ImageIO.read(newFile);
+			DataBuffer newData = newImage.getData().getDataBuffer();
+			
+			if (!(oldImage.getHeight() == newImage.getHeight() && oldImage.getWidth() == newImage.getWidth())) return false; 
+			
+			for (int i = 0; i < oldData.getSize(); i++) {
+				if (!(oldData.getElem(i) == newData.getElem(i))) return false;
+			} 
+			
+			return true;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+		
+	}
 
 	private HashSet<URI> sortFileExtension(HashSet<String> fileExtensions, File dir) {
 		HashSet<URI> URIs = new HashSet<>();
@@ -343,6 +386,37 @@ public class CorvusRunner implements IApplication {
 		   });
 	}
 	
+	private boolean comparison(DSemanticDiagram oldDiagram, DSemanticDiagram newDiagram, Comparison comparison) {
+		boolean toggle;
+		for (DDiagramElement oldEle : oldDiagram.getOwnedDiagramElements()) {
+			toggle = false;
+			for (DDiagramElement newEle : newDiagram.getOwnedDiagramElements()) {
+				if (!toggle && oldEle.getMapping().getName().equals(newEle.getMapping().getName()) && comparison.getMatch(oldEle.getTarget()) == comparison.getMatch(newEle.getTarget())) {
+					toggle = true;
+					System.out.println(oldEle + " <-> " + newEle);
+				}
+			}
+		}
+		return false;
+	}
+	
+	private boolean comparison(DEdge oldEdge, DEdge newEdge, Comparison comparison) {
+		return comparison.getMatch(oldEdge.getTarget()) == comparison.getMatch(newEdge.getTarget()) 
+				&& oldEdge.getMapping().getName() == newEdge.getMapping().getName()
+				&& comparison(oldEdge.getSourceNode(), newEdge.getSourceNode(), comparison);
+	}
+	
+	private boolean comparison(EdgeTarget oldSourceNode, EdgeTarget newSourceNode, Comparison comparison) {
+		switch (oldSourceNode) {
+		case DEdge edge : {
+			if (newSourceNode instanceof DEdge) ;
+			else return false;
+		}
+		default : return false;
+		}
+		
+	}
+
 	private static Comparison compare(ResourceSet rsLeft, ResourceSet rsRight) {
 		MatchEngineFactoryImpl matchEngineFactory = new MatchEngineFactoryImpl(UseIdentifiers.WHEN_AVAILABLE);
 		MatchEngineFactoryRegistryImpl matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
