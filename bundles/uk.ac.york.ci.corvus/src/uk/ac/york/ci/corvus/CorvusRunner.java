@@ -80,10 +80,10 @@ import org.eclipse.swt.widgets.Shell;
 public class CorvusRunner implements IApplication {
 
 	private IProgressMonitor progressMonitor;
-	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
-	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
-//	private final String OS_PATH = "/example/";
-//	private final String OUT_PATH= "/output/";
+//	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
+//	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
+	private final String OS_PATH = "/example/";
+	private final String OUT_PATH= "/output/";
 
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
