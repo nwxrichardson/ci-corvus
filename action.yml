@@ -32,8 +32,8 @@ runs:
 #      run: |
 #          aws s3 cp --recursive $(pwd)/output/model/ s3://${{ env.BUCKET_NAME }}/model
 #      shell: bash  
-    - name: Edit .md name
-      run : sed 's/Paired Up/Paired Up: ${{ github.sha }}/' $(pwd)/output/plain-sample.md
+    - name: Edit md name
+      run : sed 's/Paired Up/Paired Up:${{ github.sha }}/' $(pwd)/output/plain-sample.md
       shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
