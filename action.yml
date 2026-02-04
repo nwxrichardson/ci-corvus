@@ -32,6 +32,9 @@ runs:
 #      run: |
 #          aws s3 cp --recursive $(pwd)/output/model/ s3://${{ env.BUCKET_NAME }}/model
 #      shell: bash  
+    - name: Tree
+      run : tree
+      shell: bash
     - name: Edit md name
       run : sed 's/Paired Up/Paired Up:${{ github.sha }}/' $(pwd)/output/plain-sample.md
       shell: bash
