@@ -26,9 +26,6 @@ runs:
         path: model/old
         ref: main
     - name: Docker run
-      run : sed '44a\<plugin id="psl"/>' products\uk.ac.york.ci.corvus.product\corvus.ci.product
-      shell: bash
-    - name: Docker run
       run : docker run -v $(pwd)/output:/output/ -v $(pwd)/model/new/${{ inputs.aird-location }}:/example/new -v $(pwd)/model/old/${{ inputs.aird-location }}:/example/old nwrichardson/ci-corvus:latest
       shell: bash
 #    - name: Upload README to S3
