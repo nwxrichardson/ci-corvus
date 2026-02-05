@@ -38,7 +38,7 @@ runs:
       run : tree
       shell: bash
     - name: Edit md name
-      run : sed '1b\${{ github.sha }}' $(pwd)/output/plain-sample.md > $(pwd)/comment.md
+      run : sed '1b\ ${{ github.sha }}' $(pwd)/output/plain-sample.md > $(pwd)/comment.md
       shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
