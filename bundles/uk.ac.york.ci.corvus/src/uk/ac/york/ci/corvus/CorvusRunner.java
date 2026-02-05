@@ -138,6 +138,8 @@ public class CorvusRunner implements IApplication {
 			addAllModels(fileExtensions, oldSession, oldDir);
 			addAllModels(fileExtensions, newSession, newDir);
 						
+			System.out.println(newSession.getSemanticResources());
+			System.out.println(oldSession.getSemanticResources());
 			
 			ResourceSet rsNew = newSession.getSemanticResources().iterator().next().getResourceSet();
 			ResourceSet rsOld = oldSession.getSemanticResources().iterator().next().getResourceSet();
