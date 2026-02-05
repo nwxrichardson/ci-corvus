@@ -38,9 +38,9 @@ runs:
       run : tree
       shell: bash
     - name: Edit md name
-      run : sed 's/Paired Up/Paired Up:${{ github.sha }}/' $(pwd)/output/plain-sample.md > $(pwd)/output/comment.md
+      run : sed 's/Paired Up/Paired Up:${{ github.sha }}/' $(pwd)/output/plain-sample.md > $(pwd)/comment.md
       shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
       with:
-        file: output/comment.md
+        file: comment.md
