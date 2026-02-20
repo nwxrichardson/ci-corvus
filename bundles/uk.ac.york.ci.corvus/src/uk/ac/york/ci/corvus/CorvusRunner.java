@@ -12,13 +12,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.DiffBuilder;
 import org.eclipse.emf.compare.diff.FeatureFilter;
@@ -26,6 +27,7 @@ import org.eclipse.emf.compare.diff.IDiffEngine;
 import org.eclipse.emf.compare.diff.IDiffProcessor;
 import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.EMFCompare;
+import org.eclipse.emf.compare.Match;
 import org.eclipse.emf.compare.diff.DefaultDiffEngine;
 import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
 import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
@@ -80,16 +82,20 @@ import org.eclipse.swt.widgets.Shell;
 public class CorvusRunner implements IApplication {
 
 	private IProgressMonitor progressMonitor;
-//	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
-//	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
-	private final String OS_PATH = "/example/";
-	private final String OUT_PATH= "/output/";
+	private final String OUT_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/empty/";
+	private final String OS_PATH = "C:/Users/nr823/eclipse-workspace/CI-corvus-2/psl.example.versions/";
+//	private final String OS_PATH = "/example/";
+//	private final String OUT_PATH= "/output/";
+	DialectUIManager dialectUIManager = DialectUIManager.INSTANCE;
+	DialectManager dialectManager = DialectManager.INSTANCE;
 
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
 		context.applicationRunning();
 		Map<String, Object> contextArguments = context.getArguments();
 		progressMonitor = new NullProgressMonitor();
+		dialectUIManager.enableDialectUI(new DiagramDialectUI());
+		dialectManager.enableDialect(new DiagramDialect());
 		return run(contextArguments.get(IApplicationContext.APPLICATION_ARGS));
 	}
 
@@ -133,13 +139,8 @@ public class CorvusRunner implements IApplication {
 			newCreation.execute();
 			Session newSession = newCreation.getCreatedSession();
 			
-			
-			
 			addAllModels(fileExtensions, oldSession, oldDir);
 			addAllModels(fileExtensions, newSession, newDir);
-						
-			System.out.println(newSession.getSemanticResources());
-			System.out.println(oldSession.getSemanticResources());
 			
 			ResourceSet rsNew = newSession.getSemanticResources().iterator().next().getResourceSet();
 			ResourceSet rsOld = oldSession.getSemanticResources().iterator().next().getResourceSet();
@@ -152,57 +153,44 @@ public class CorvusRunner implements IApplication {
 			Resource rComparison = rsComparison.createResource(URI.createFileURI(OS_PATH + "psl.compare"));		
 			rComparison.getContents().add(comparison);
 			
-			
-			DialectUIManager duim = DialectUIManager.INSTANCE;
-			DialectManager dm = DialectManager.INSTANCE;
-			duim.enableDialectUI(new DiagramDialectUI());
-			dm.enableDialect(new DiagramDialect());
-			
 			oldSession.open(progressMonitor);
 			
-			DView newView = newSession.getSelectedViews().iterator().next();
-			DView oldView = oldSession.getSelectedViews().iterator().next();
+			System.out.println(oldSession.getSelectedViews());
 			
-			HashMap<String, RepresentationDescription> oldRepMap = new HashMap<String, RepresentationDescription>();
-			for (RepresentationDescription r : oldSession.getSelectedViewpoints(false).iterator().next().getOwnedRepresentations()) {
-				oldRepMap.put(r.getName(), r);
-			}
+			HashSet<ImmutablePair<Match, String>> oldDescriptorMap = getDescriptorMap(oldSession, comparison);
+			HashSet<ImmutablePair<Match, String>> newDescriptorMap = getDescriptorMap(newSession, comparison);
 			
-			for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
-				EObject eObject = comparison.getMatch(descriptor.getTarget()).getLeft();
-				RepresentationDescription rd = oldRepMap.get(descriptor.getDescription().getName());
-				if (eObject == null) {
-					
-				} else if (!containsRep(eObject, rd, oldView)) {
-					createFormattedRep(oldSession, eObject, rd, duim, dm);
-				}
+			HashMap<String, RepresentationDescription> oldRepMap = getRepresentationNameMap(oldSession);
+			HashMap<String, RepresentationDescription> newRepMap = getRepresentationNameMap(newSession);
+			
+			HashSet<Pair<Match, String>> oldToCreateMap = new HashSet<>();
+			oldToCreateMap.addAll(newDescriptorMap);
+			oldToCreateMap.removeAll(oldDescriptorMap);
+			
+			HashSet<Pair<Match, String>> newToCreateMap = new HashSet<>();
+			newToCreateMap.addAll(oldDescriptorMap);
+			newToCreateMap.removeAll(newDescriptorMap);
+			
+			for (Pair<Match, String> toCreate : oldToCreateMap) {
 				
-			}
-			HashMap<String, RepresentationDescription> newRepMap = new HashMap<String, RepresentationDescription>();
-			for (RepresentationDescription r : newSession.getSelectedViewpoints(false).iterator().next().getOwnedRepresentations()) {
-				newRepMap.put(r.getName(), r);
+				createFormattedRep(oldSession, toCreate.getKey().getLeft(), oldRepMap.get(toCreate.getValue()));
 			}
 			
-			for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
-				EObject eObject = comparison.getMatch(descriptor.getTarget()).getRight();
-				RepresentationDescription rd = newRepMap.get(descriptor.getDescription().getName());
-				if (eObject == null) {
-					
-				} else if (!containsRep(eObject, rd, newView)) {
-					createFormattedRep(newSession, eObject, rd, duim, dm);
+			for (Pair<Match, String> toCreate : newToCreateMap) {
+				createFormattedRep(newSession, toCreate.getKey().getRight(), newRepMap.get(toCreate.getValue()));
+			}					
+			
+			for (DView oldView : oldSession.getOwnedViews()) {
+				for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
+					exportRep("model/old/old-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), oldSession, dialectUIManager);
 				}
 			}
 			
-			for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
-				exportRep("model/old/old-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), oldSession, duim);
-
+			for (DView newView : newSession.getOwnedViews()) {
+				for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
+					exportRep("model/new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, dialectUIManager);
+				}
 			}
-			
-			for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
-				exportRep("model/new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, duim);
-			}
-			
-			
 			
 	        File mdFile = new File(OUT_PATH + "plain-sample.md");
 	        mdFile.createNewFile();
@@ -210,21 +198,22 @@ public class CorvusRunner implements IApplication {
 	        
 	        mdWriter.write("# Paired up \n");
 	        
-	        EList<DRepresentationDescriptor> newDescriptors = newView.getOwnedRepresentationDescriptors();
-	        for (DRepresentationDescriptor oldDescriptor : oldView.getOwnedRepresentationDescriptors()) {
-	        	
-	        	
-	        	for (DRepresentationDescriptor newDescriptor : newDescriptors) {
-	        		if (oldDescriptor.getDescription().getName().equals(newDescriptor.getDescription().getName()) 
-	        				&& imageComparison(oldDescriptor, newDescriptor))  {
-	        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
-	        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?\" width=\"50%\">");
-	    	        	break;
+	        for (DView oldView : oldSession.getOwnedViews()) {
+	        	for (DRepresentationDescriptor oldDescriptor : oldView.getOwnedRepresentationDescriptors()) {
+	        		for (DView newView : newSession.getOwnedViews()) {
+	        			for (DRepresentationDescriptor newDescriptor : newView.getOwnedRepresentationDescriptors()) {
+	        				if (oldDescriptor.getDescription().getName().equals(newDescriptor.getDescription().getName()) 
+			        				&& ! imageComparison(oldDescriptor, newDescriptor))  {
+			        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
+			        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?\" width=\"50%\">");
+			        			break;
+			        		}
+			        	}
 	        		}
-	        	}
-	        	
-	        	
-			}
+		        		
+				}
+	        }
+	        
 	        
 	        mdWriter.close();
 		} catch (Exception e) {
@@ -233,6 +222,26 @@ public class CorvusRunner implements IApplication {
 		}
 		return null;
 		}
+
+	private HashMap<String, RepresentationDescription> getRepresentationNameMap(Session session) {
+		HashMap<String, RepresentationDescription> newRepMap = new HashMap<String, RepresentationDescription>();
+		for (Viewpoint view : session.getSelectedViewpoints(false)) {
+			for (RepresentationDescription description : view.getOwnedRepresentations()) {
+				newRepMap.put(description.getName(), description);
+			}
+		}
+		return newRepMap;
+	}
+
+	private HashSet<ImmutablePair<Match, String>> getDescriptorMap(Session session, Comparison comparison) {
+		HashSet<ImmutablePair<Match, String>> descriptorMap = new HashSet<ImmutablePair<Match, String>>();
+		for (DView view : session.getOwnedViews()) {
+			for (DRepresentationDescriptor descriptor : view.getOwnedRepresentationDescriptors()) {
+				descriptorMap.add(new ImmutablePair<Match, String>(comparison.getMatch(descriptor.getTarget()), descriptor.getDescription().getName()));
+			}
+		}
+		return descriptorMap;
+	}
 
 	private boolean imageComparison(DRepresentationDescriptor oldDescriptor, DRepresentationDescriptor newDescriptor) {
 		try {
@@ -302,17 +311,8 @@ public class CorvusRunner implements IApplication {
 			}
 		});
 	}
-	
-	private boolean containsRep(EObject eObject, RepresentationDescription rd, DView view) {
-		for (DRepresentationDescriptor descriptor : view.getOwnedRepresentationDescriptors()) {
-			if (descriptor.getTarget().equals(eObject) && descriptor.getDescription().equals(rd)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
-	private void createFormattedRep(Session session, EObject eObject, RepresentationDescription rd, DialectUIManager dialectUIManager, DialectManager dialectManager) {
+	private void createFormattedRep(Session session, EObject eObject, RepresentationDescription rd) {
 		session.getTransactionalEditingDomain().getCommandStack().execute(new RecordingCommand(session.getTransactionalEditingDomain()) {
 			   @Override
 			   protected void doExecute() {
