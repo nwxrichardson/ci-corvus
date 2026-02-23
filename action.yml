@@ -17,13 +17,11 @@ runs:
     - name: Checkout ci-corvus
       uses: actions/checkout@v4
       with: 
-        repository: epsilonlabs/sirius-pr-action-workspace
         sparse-checkout: '${{ inputs.aird-location }}'
         path: model/new        
     - name: Checkout ci-corvus
       uses: actions/checkout@v4
-      with: 
-        repository: epsilonlabs/sirius-pr-action-workspace
+      with:
         sparse-checkout: '${{ inputs.aird-location }}'
         path: model/old
         ref: main
