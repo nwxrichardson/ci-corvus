@@ -204,8 +204,8 @@ public class CorvusRunner implements IApplication {
 	        			for (DRepresentationDescriptor newDescriptor : newView.getOwnedRepresentationDescriptors()) {
 	        				if (oldDescriptor.getDescription().getName().equals(newDescriptor.getDescription().getName()) 
 			        				&& ! imageComparison(oldDescriptor, newDescriptor))  {
-			        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
-			        			mdWriter.write("<img src=\"https://uk-ac-york-scheme-image-upload-dev.s3.eu-west-1.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?\" width=\"50%\">");
+			        			mdWriter.write("<img src=\"https://%BUCKET_NAME%.s3.amazonaws.com/model/old/old-"+ getFileName(oldDescriptor) + ".png?\" width=\"50%\">");
+			        			mdWriter.write("<img src=\"https://%BUCKET_NAME%.s3.amazonaws.com/model/new/new-"+ getFileName(newDescriptor) + ".png?\" width=\"50%\">");
 			        			break;
 			        		}
 			        	}
