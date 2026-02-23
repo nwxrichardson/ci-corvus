@@ -35,8 +35,11 @@ runs:
     - name: Tree
       run : tree
       shell: bash
-    - name: Edit md name
-      run : sed '1a\${{ github.sha }}' $(pwd)/output/plain-sample.md > $(pwd)/comment.md
+    - name: Add sha
+      run : sed '1a\${{ github.sha }}' $(pwd)/output/plain-sample.md > $(pwd)/add-sha.md
+      shell: bash
+    - name: Edit bucket name
+      run : sed 's/%BUCKET_NAME%/${{ env.BUCKET_NAME }}/g' $(pwd)/output/add-sha.md > $(pwd)/comment.md
       shell: bash
     - name: Create comment from markdown file
       uses: GrantBirki/comment@v2.1.1
