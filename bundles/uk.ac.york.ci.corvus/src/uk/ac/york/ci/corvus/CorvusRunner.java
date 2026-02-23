@@ -1,12 +1,14 @@
 package uk.ac.york.ci.corvus;
 
+import corvusmatch.Comparison;
+import corvusmatch.Match;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,18 +23,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.DiffBuilder;
-import org.eclipse.emf.compare.diff.FeatureFilter;
-import org.eclipse.emf.compare.diff.IDiffEngine;
-import org.eclipse.emf.compare.diff.IDiffProcessor;
-import org.eclipse.emf.compare.Comparison;
-import org.eclipse.emf.compare.EMFCompare;
-import org.eclipse.emf.compare.Match;
-import org.eclipse.emf.compare.diff.DefaultDiffEngine;
-import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
-import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
-import org.eclipse.emf.compare.scope.DefaultComparisonScope;
-import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EObject;
@@ -50,17 +40,13 @@ import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
-import org.eclipse.gef.EditPart;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.session.DefaultLocalSessionCreationOperation;
 import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.resource.AirdResource;
 import org.eclipse.sirius.common.tools.api.resource.ImageFileFormat;
 import org.eclipse.sirius.diagram.DDiagram;
-import org.eclipse.sirius.diagram.DDiagramElement;
-import org.eclipse.sirius.diagram.DEdge;
-import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.internal.dialect.DiagramDialect;
 import org.eclipse.sirius.diagram.ui.business.api.view.SiriusGMFHelper;
 import org.eclipse.sirius.diagram.ui.business.internal.dialect.DiagramDialectUI;
@@ -78,6 +64,7 @@ import org.eclipse.sirius.viewpoint.DView;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.swt.widgets.Shell;
+import uk.ac.york.corvus.jobs.CorvusCompareGen;
 
 public class CorvusRunner implements IApplication {
 
@@ -117,12 +104,14 @@ public class CorvusRunner implements IApplication {
 		
 		File oldDir = new File(OS_PATH, "old");
 		File newDir = new File(OS_PATH, "new");
+		File comDir = new File(OS_PATH, "com");
 		
 		HashSet<String> airdSet = new HashSet<String>();
 		airdSet.add("aird");
 		
 		URI oldSessionResourceURI = sortFileExtension(airdSet, oldDir).iterator().next();
 		URI newSessionResourceURI = sortFileExtension(airdSet, newDir).iterator().next();
+		URI comSessionResourceURI = URI.createFileURI(OS_PATH + "com/compare.aird");
 		Set<Viewpoint> viewpoints = ViewpointRegistry.getInstance().getViewpoints();
 		
         
@@ -130,6 +119,7 @@ public class CorvusRunner implements IApplication {
 			
 			new File(OUT_PATH+"model/old/").mkdirs();
 			new File(OUT_PATH+"model/new/").mkdirs();
+			new File(OUT_PATH+"model/com/").mkdirs();
 			
 			DefaultLocalSessionCreationOperation oldCreation = new DefaultLocalSessionCreationOperation(oldSessionResourceURI, progressMonitor);
 			oldCreation.execute();
@@ -139,46 +129,61 @@ public class CorvusRunner implements IApplication {
 			newCreation.execute();
 			Session newSession = newCreation.getCreatedSession();
 			
+			DefaultLocalSessionCreationOperation comCreation = new DefaultLocalSessionCreationOperation(comSessionResourceURI, progressMonitor);
+			comCreation.execute();
+			Session comSession = newCreation.getCreatedSession();
+			
 			addAllModels(fileExtensions, oldSession, oldDir);
 			addAllModels(fileExtensions, newSession, newDir);
+			addAllModels(fileExtensions, comSession, newDir);
 			
 			ResourceSet rsNew = newSession.getSemanticResources().iterator().next().getResourceSet();
 			ResourceSet rsOld = oldSession.getSemanticResources().iterator().next().getResourceSet();
+			rsNew.getResources().iterator().next().setURI(comSessionResourceURI);
+			rsNew.getResources().iterator().next().save(null);
+			System.out.println(rsNew.getResources().iterator().next());
+			
+			Resource rComparison = compare(rsOld, rsNew);
+			Comparison comparison = (Comparison) rComparison.getContents().iterator().next();
+			addSemanticResources(comSession, rComparison.getURI());
 			
 			addViewpoints(newSession, viewpoints);
 			addViewpoints(oldSession, viewpoints);
-			
-			Comparison comparison = compare(rsOld, rsNew);
-			ResourceSet rsComparison = new ResourceSetImpl();
-			Resource rComparison = rsComparison.createResource(URI.createFileURI(OS_PATH + "psl.compare"));		
-			rComparison.getContents().add(comparison);
+			addViewpoints(comSession, viewpoints);
 			
 			oldSession.open(progressMonitor);
-			
-			System.out.println(oldSession.getSelectedViews());
 			
 			HashSet<ImmutablePair<Match, String>> oldDescriptorMap = getDescriptorMap(oldSession, comparison);
 			HashSet<ImmutablePair<Match, String>> newDescriptorMap = getDescriptorMap(newSession, comparison);
 			
 			HashMap<String, RepresentationDescription> oldRepMap = getRepresentationNameMap(oldSession);
 			HashMap<String, RepresentationDescription> newRepMap = getRepresentationNameMap(newSession);
+			HashMap<String, RepresentationDescription> comRepMap = getRepresentationNameMap(comSession);
 			
 			HashSet<Pair<Match, String>> oldToCreateMap = new HashSet<>();
 			oldToCreateMap.addAll(newDescriptorMap);
 			oldToCreateMap.removeAll(oldDescriptorMap);
 			
+			
 			HashSet<Pair<Match, String>> newToCreateMap = new HashSet<>();
 			newToCreateMap.addAll(oldDescriptorMap);
 			newToCreateMap.removeAll(newDescriptorMap);
 			
+			HashSet<Pair<Match, String>> comToCreateMap = new HashSet<>();
+			comToCreateMap.addAll(oldDescriptorMap);
+			comToCreateMap.addAll(newDescriptorMap);
+			
 			for (Pair<Match, String> toCreate : oldToCreateMap) {
-				
 				createFormattedRep(oldSession, toCreate.getKey().getLeft(), oldRepMap.get(toCreate.getValue()));
 			}
 			
 			for (Pair<Match, String> toCreate : newToCreateMap) {
 				createFormattedRep(newSession, toCreate.getKey().getRight(), newRepMap.get(toCreate.getValue()));
-			}					
+			}	
+			
+			for (Pair<Match, String> toCreate : comToCreateMap) {
+				createFormattedRep(comSession, toCreate.getKey(), comRepMap.get("Match " + toCreate.getValue()));
+			}	
 			
 			for (DView oldView : oldSession.getOwnedViews()) {
 				for (DRepresentationDescriptor descriptor : oldView.getOwnedRepresentationDescriptors()) {
@@ -189,6 +194,12 @@ public class CorvusRunner implements IApplication {
 			for (DView newView : newSession.getOwnedViews()) {
 				for (DRepresentationDescriptor descriptor : newView.getOwnedRepresentationDescriptors()) {
 					exportRep("model/new/new-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), newSession, dialectUIManager);
+				}
+			}
+			
+			for (DView comView : comSession.getOwnedViews()) {
+				for (DRepresentationDescriptor descriptor : comView.getOwnedRepresentationDescriptors()) {
+					exportRep("model/com/com-" + getFileName(descriptor) + ".png", descriptor.getRepresentation(), comSession, dialectUIManager);
 				}
 			}
 			
@@ -344,110 +355,15 @@ public class CorvusRunner implements IApplication {
 			dialectUIManager.export(representation, session, exportPath, exportFormat,
 			    		progressMonitor);
 		} catch (SizeTooLargeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void completeCreate(URI semanticResourceURI, Session session, DialectUIManager dialectUIManager, DialectManager dialectManager,
-			Set<Viewpoint> viewpoints, String path) {
-		session.getTransactionalEditingDomain().getCommandStack().execute(new RecordingCommand(session.getTransactionalEditingDomain()) {
-			   @Override
-			   protected void doExecute() {
-				   session.addSemanticResource(semanticResourceURI, progressMonitor);
-				   new ChangeViewpointSelectionCommand(session, new ViewpointSelectionCallback(), viewpoints, new HashSet<Viewpoint>(), progressMonitor).execute();
-				   Collection<Resource> resources = session.getSemanticResources();
-				   EObject eObject = ((Resource) resources.toArray()[0]).getAllContents().next();
-				   RepresentationDescription rd = session.getSelectedViewpoints(false).iterator().next().getOwnedRepresentations().get(2);
-				   DRepresentation representation = dialectManager.createRepresentation("Test", eObject, rd, session, progressMonitor);
-				   DView dView = session.getOwnedViews().iterator().next();
-				   System.out.println(session.getOwnedViews().iterator().next());
-				   Diagram diagram = SiriusGMFHelper.getGmfDiagram((DDiagram) representation);
-				   DiagramEditPart editPart = OffscreenEditPartFactory.getInstance().createDiagramEditPart(diagram, new Shell());
-				   editPart.enableEditMode();
-				   List<EditPart> editParts = new ArrayList<EditPart>();
-				   editParts.add(editPart);
 
-				   ArrangeRequest request = new ArrangeRequest(ActionIds.ACTION_ARRANGE_ALL, LayoutType.DEFAULT);
-				   request.setPartsToArrange(editParts);
-				   editPart.performRequest(request);
-				   
-				   ArrangeRequest request2 = new ArrangeRequest(ActionIds.ACTION_AUTOSIZE, LayoutType.DEFAULT);
-				   request2.setPartsToArrange(editParts);
-				   editPart.performRequest(request2);
-				   ExportFormat exportFormat = new ExportFormat(ExportDocumentFormat.NONE, ImageFileFormat.PNG);
-			       Path exportPath = new Path(OS_PATH + path);
-				   try {
-					dialectUIManager.export(representation, session, exportPath, exportFormat,
-					    		new NullProgressMonitor());
-				} catch (SizeTooLargeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			   }   
-		   });
-	}
-	
-	private boolean comparison(DSemanticDiagram oldDiagram, DSemanticDiagram newDiagram, Comparison comparison) {
-		boolean toggle;
-		for (DDiagramElement oldEle : oldDiagram.getOwnedDiagramElements()) {
-			toggle = false;
-			for (DDiagramElement newEle : newDiagram.getOwnedDiagramElements()) {
-				if (!toggle && oldEle.getMapping().getName().equals(newEle.getMapping().getName()) && comparison.getMatch(oldEle.getTarget()) == comparison.getMatch(newEle.getTarget())) {
-					toggle = true;
-					System.out.println(oldEle + " <-> " + newEle);
-				}
-			}
-		}
-		return false;
-	}
-	
-	private boolean comparison(DEdge oldEdge, DEdge newEdge, Comparison comparison) {
-		return comparison.getMatch(oldEdge.getTarget()) == comparison.getMatch(newEdge.getTarget()) 
-				&& oldEdge.getMapping().getName() == newEdge.getMapping().getName()
-				&& comparison(oldEdge.getSourceNode(), newEdge.getSourceNode(), comparison);
-	}
-	
-	private boolean comparison(EdgeTarget oldSourceNode, EdgeTarget newSourceNode, Comparison comparison) {
-		switch (oldSourceNode) {
-		case DEdge edge : {
-			if (newSourceNode instanceof DEdge) ;
-			else return false;
-		}
-		default : return false;
-		}
-		
-	}
-
-	private static Comparison compare(ResourceSet rsLeft, ResourceSet rsRight) {
-		MatchEngineFactoryImpl matchEngineFactory = new MatchEngineFactoryImpl(UseIdentifiers.WHEN_AVAILABLE);
-		MatchEngineFactoryRegistryImpl matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
-		matchEngineRegistry.add(matchEngineFactory);
-		IDiffProcessor diffProcessor = new DiffBuilder();
-		IDiffEngine diffEngine = new DefaultDiffEngine(diffProcessor) {
-			@Override
-			protected FeatureFilter createFeatureFilter() {
-				return new FeatureFilter() {
-					@Override
-					public boolean checkForOrderingChanges(EStructuralFeature feature) {
-						return false;
-					}
-				};
-			}
-		};
-		
-
-		EMFCompare emfCompare = EMFCompare.builder()
-			.setMatchEngineFactoryRegistry(matchEngineRegistry)
-			.setDiffEngine(diffEngine)
-			.build();
-
-		EcoreUtil.resolveAll(rsLeft);
-		EcoreUtil.resolveAll(rsRight);
-		
-		DefaultComparisonScope scope = new DefaultComparisonScope(rsLeft, rsRight, null);
-		Comparison comparison = emfCompare.compare(scope);
-		return comparison;
+	private static Resource compare(ResourceSet rsLeft, ResourceSet rsRight) throws Exception {
+		CorvusCompareGen corvusGen = new CorvusCompareGen("Generate Corvusmatch", rsLeft, rsRight);
+		corvusGen.schedule();
+		corvusGen.join();
+		return corvusGen.getCorvusMatch();
 	}
 
 	@Override
